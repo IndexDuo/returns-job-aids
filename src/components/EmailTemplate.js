@@ -8,13 +8,12 @@ const EmailTemplate = () => {
     name: '',
     phone: '',
     trackingNumber: '',
-    // other fields if needed
   });
 
   const [copied, setCopied] = useState(false);
 
+  // Load data from cookies when the component mounts
   useEffect(() => {
-    // Load data from cookies if available
     const savedData = Cookies.get('userInfo');
     if (savedData) {
       setFormData(JSON.parse(savedData));
@@ -28,8 +27,11 @@ const EmailTemplate = () => {
 
   const handleCopy = () => {
     setCopied(true);
-    // Save data to cookies
+  };
+
+  const handleSaveToCookies = () => {
     Cookies.set('userInfo', JSON.stringify(formData), { expires: 0.375 }); // 9 hours
+    alert('User information saved to cookies!');
   };
 
   const template = `
@@ -80,6 +82,8 @@ const EmailTemplate = () => {
           <button type="button">Copy Template</button>
         </CopyToClipboard>
         {copied && <span style={{ color: 'green' }}>Copied!</span>}
+        <br />
+        <button type="button" onClick={handleSaveToCookies}>Save Info to Cookies</button>
       </form>
       <h3>Preview</h3>
       <pre>{template}</pre>

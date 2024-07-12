@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import EmailTemplate from './EmailTemplate';
+import EmailTemplate from './components/EmailTemplate.js';
 
 function App() {
   return (
