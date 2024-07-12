@@ -45,7 +45,7 @@ const EmailTemplate = () => {
         setTimeout(() => setCopied(false), 3000);
     };
 
-    
+
     const template = `
 Dear [Customer],
 
@@ -56,6 +56,7 @@ ${formData.name}
   `;
 
     return (
+        
         <Container className="mt-5">
             <Row>
                 <Col md={8} className="mx-auto">
