@@ -30,7 +30,7 @@ const EmailTemplate = () => {
   };
 
   const handleInput = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.innerText });
+    setFormData({  [field]: e.target.innerText, ...formData });
   };
 
   const handleCopy = () => {
