@@ -1,4 +1,3 @@
-// src/components/EmailTemplate.js
 import React, { useState, useEffect, useRef } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
@@ -11,10 +10,6 @@ const EmailTemplate = () => {
   });
 
   const [copied, setCopied] = useState(false);
-
-  const nameRef = useRef(null);
-  const phoneRef = useRef(null);
-  const trackingNumberRef = useRef(null);
 
   useEffect(() => {
     // Load data from cookies if available
@@ -59,31 +54,28 @@ const EmailTemplate = () => {
         <p>Dear [Customer],</p>
         <p>
           My name is <span
-            ref={nameRef}
             contentEditable
             suppressContentEditableWarning
             onInput={(e) => handleInput(e, 'name')}
             onBlur={() => handleBlur('name')}
+            dangerouslySetInnerHTML={{ __html: formData.name }}
           >
-            {formData.name}
           </span>.
           I am contacting you regarding the return of the item with the tracking number <span
-            ref={trackingNumberRef}
             contentEditable
             suppressContentEditableWarning
             onInput={(e) => handleInput(e, 'trackingNumber')}
             onBlur={() => handleBlur('trackingNumber')}
+            dangerouslySetInnerHTML={{ __html: formData.trackingNumber }}
           >
-            {formData.trackingNumber}
           </span>.
           Please contact me at <span
-            ref={phoneRef}
             contentEditable
             suppressContentEditableWarning
             onInput={(e) => handleInput(e, 'phone')}
             onBlur={() => handleBlur('phone')}
+            dangerouslySetInnerHTML={{ __html: formData.phone }}
           >
-            {formData.phone}
           </span> if you need any further information.
         </p>
         <p>Thank you,<br />
