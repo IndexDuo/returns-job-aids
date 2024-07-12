@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 
 const EmailTemplate = () => {
+    
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -13,7 +14,8 @@ const EmailTemplate = () => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const savedData = Cookies.get('userInfo');
+    // saved data should be agentInfo, which is their first and last name
+    const savedData = Cookies.get('agentInfo');
     if (savedData) {
       setFormData(JSON.parse(savedData));
     }
@@ -26,7 +28,8 @@ const EmailTemplate = () => {
       value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     }
     setFormData({ ...formData, [field]: value });
-    Cookies.set('userInfo', JSON.stringify({ ...formData, [field]: value }), { expires: 0.375 });
+    // cookies does not need to be saved for form data.
+    // Cookies.set('userInfo', JSON.stringify({ ...formData, [field]: value }), { expires: 0.375 });
   };
 
   const handleInput = (e, field) => {
