@@ -1,13 +1,25 @@
 // src/components/EmailTemplate.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Cookies from 'js-cookie';
 
 const EmailTemplate = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     trackingNumber: '',
-    // other fields
+    // other fields if needed
   });
+
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    // Load data from cookies if available
+    const savedData = Cookies.get('userInfo');
+    if (savedData) {
+      setFormData(JSON.parse(savedData));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,8 +27,19 @@ const EmailTemplate = () => {
   };
 
   const handleCopy = () => {
-    // validation and copy logic
+    setCopied(true);
+    // Save data to cookies
+    Cookies.set('userInfo', JSON.stringify(formData), { expires: 0.375 }); // 9 hours
   };
+
+  const template = `
+    Dear [Customer],
+
+    My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
+
+    Thank you,
+    ${formData.name}
+  `;
 
   return (
     <div>
@@ -29,9 +52,9 @@ const EmailTemplate = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            // Add regex and validation
           />
         </label>
+        <br />
         <label>
           Phone:
           <input
@@ -39,9 +62,9 @@ const EmailTemplate = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            // Add regex and validation
           />
         </label>
+        <br />
         <label>
           Tracking Number:
           <input
@@ -49,13 +72,17 @@ const EmailTemplate = () => {
             name="trackingNumber"
             value={formData.trackingNumber}
             onChange={handleChange}
-            // Add regex and validation
           />
           <span title="Find this on the package">?</span>
         </label>
-        {/* Other fields */}
-        <button type="button" onClick={handleCopy}>Copy Template</button>
+        <br />
+        <CopyToClipboard text={template} onCopy={handleCopy}>
+          <button type="button">Copy Template</button>
+        </CopyToClipboard>
+        {copied && <span style={{ color: 'green' }}>Copied!</span>}
       </form>
+      <h3>Preview</h3>
+      <pre>{template}</pre>
     </div>
   );
 };
