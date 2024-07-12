@@ -60,82 +60,44 @@ ${formData.name}
         <Container className="mt-5">
             <Row>
                 <Col md={8} className="mx-auto">
-                    <h2 className="mb-4">Email Template</h2>
+                    <h2 className="mb-4">Agent Info</h2>
                     <Form>
                         <Form.Group className="mb-3">
-                            <Form.Label>Template:</Form.Label>
-                            <div className="border p-3 rounded">
-                                <p>Dear [Customer],</p>
-                                <p>
-                                    My name is{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) => handleInput(e, "name")}
-                                        onBlur={() => handleBlur("name")}
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.name,
-                                        }}
-                                        className="text-primary"
-                                    ></span>
-                                    . I am contacting you regarding the return
-                                    of the item with the tracking number{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) =>
-                                            handleInput(e, "trackingNumber")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("trackingNumber")
-                                        }
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.trackingNumber,
-                                        }}
-                                        className="text-primary"
-                                    ></span>
-                                    . Please contact me at{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) => handleInput(e, "phone")}
-                                        onBlur={() => handleBlur("phone")}
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.phone,
-                                        }}
-                                        className="text-primary"
-                                    ></span>{" "}
-                                    if you need any further information.
-                                </p>
-                                <p>
-                                    Thank you,
-                                    <br />
-                                    <span>{formData.name}</span>
-                                </p>
-                            </div>
-                        </Form.Group>
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <CopyToClipboard
-                                text={template}
-                                onCopy={handleCopy}
-                            >
-                                <Button variant="primary">Copy Template</Button>
-                            </CopyToClipboard>
-                            {copied && (
-                                <Alert variant="success" className="m-0 py-1">
-                                    Copied!
-                                </Alert>
-                            )}
-                        </div>
-                        <Form.Group>
-                            <Form.Label>Preview:</Form.Label>
+                            <Form.Label>First Name:</Form.Label>
                             <Form.Control
-                                as="textarea"
-                                rows={6}
-                                value={template}
-                                readOnly
+                                type="text"
+                                value={agentInfo.firstName}
+                                onChange={(e) =>
+                                    setAgentInfo({
+                                        ...agentInfo,
+                                        firstName: e.target.value,
+                                    })
+                                }
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Last Name:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={agentInfo.lastName}
+                                onChange={(e) =>
+                                    setAgentInfo({
+                                        ...agentInfo,
+                                        lastName: e.target.value,
+                                    })
+                                }
+                            />
+                        </Form.Group>
+                        <Button
+                            variant="primary"
+                            onClick={() => {
+                                Cookies.set("agentInfo", JSON.stringify(agentInfo), {
+                                    expires: 0.375,
+                                });
+                            }}
+                        >
+                            Save
+                        </Button>
                     </Form>
                 </Col>
             </Row>
