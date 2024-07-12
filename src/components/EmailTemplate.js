@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 
 const EmailTemplate = () => {
   const [formData, setFormData] = useState({
@@ -12,84 +13,95 @@ const EmailTemplate = () => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    // Load data from cookies if available
     const savedData = Cookies.get('userInfo');
     if (savedData) {
       setFormData(JSON.parse(savedData));
     }
   }, []);
-  
 
   const handleBlur = (field) => {
     let value = formData[field];
     if (field === 'phone') {
-      // Apply phone number formatting
-      value = value.replace(/\D/g, ''); // Remove non-numeric characters
-      value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'); // Format as (123) 456-7890
+      value = value.replace(/\D/g, '');
+      value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     }
     setFormData({ ...formData, [field]: value });
     Cookies.set('userInfo', JSON.stringify({ ...formData, [field]: value }), { expires: 0.375 });
   };
 
   const handleInput = (e, field) => {
-    setFormData({  [field]: e.target.innerText, ...formData });
+    setFormData({ ...formData, [field]: e.target.innerText });
   };
 
   const handleCopy = () => {
     setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
   };
 
   const template = `
-    Dear [Customer],
+Dear [Customer],
 
-    My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
+My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
 
-    Thank you,
-    ${formData.name}
+Thank you,
+${formData.name}
   `;
 
   return (
-    <div>
-      <h2>Email Template</h2>
-      <div>
-        <p>Dear [Customer],</p>
-        <p>
-          My name is <span
-            contentEditable
-            suppressContentEditableWarning
-            onInput={(e) => handleInput(e, 'name')}
-            onBlur={() => handleBlur('name')}
-            dangerouslySetInnerHTML={{ __html: formData.name }}
-          >
-          </span>.
-          I am contacting you regarding the return of the item with the tracking number <span
-            contentEditable
-            suppressContentEditableWarning
-            onInput={(e) => handleInput(e, 'trackingNumber')}
-            onBlur={() => handleBlur('trackingNumber')}
-            dangerouslySetInnerHTML={{ __html: formData.trackingNumber }}
-          >
-          </span>.
-          Please contact me at <span
-            contentEditable
-            suppressContentEditableWarning
-            onInput={(e) => handleInput(e, 'phone')}
-            onBlur={() => handleBlur('phone')}
-            dangerouslySetInnerHTML={{ __html: formData.phone }}
-          >
-          </span> if you need any further information.
-        </p>
-        <p>Thank you,<br />
-          <span>{formData.name}</span>
-        </p>
-      </div>
-      <CopyToClipboard text={template} onCopy={handleCopy}>
-        <button type="button">Copy Template</button>
-      </CopyToClipboard>
-      {copied && <span style={{ color: 'green' }}>Copied!</span>}
-      <h3>Preview</h3>
-      <pre>{template}</pre>
-    </div>
+    <Container className="mt-5">
+      <Row>
+        <Col md={8} className="mx-auto">
+          <h2 className="mb-4">Email Template</h2>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Template:</Form.Label>
+              <div className="border p-3 rounded">
+                <p>Dear [Customer],</p>
+                <p>
+                  My name is <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onInput={(e) => handleInput(e, 'name')}
+                    onBlur={() => handleBlur('name')}
+                    dangerouslySetInnerHTML={{ __html: formData.name }}
+                    className="text-primary"
+                  ></span>.
+                  I am contacting you regarding the return of the item with the tracking number <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onInput={(e) => handleInput(e, 'trackingNumber')}
+                    onBlur={() => handleBlur('trackingNumber')}
+                    dangerouslySetInnerHTML={{ __html: formData.trackingNumber }}
+                    className="text-primary"
+                  ></span>.
+                  Please contact me at <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onInput={(e) => handleInput(e, 'phone')}
+                    onBlur={() => handleBlur('phone')}
+                    dangerouslySetInnerHTML={{ __html: formData.phone }}
+                    className="text-primary"
+                  ></span> if you need any further information.
+                </p>
+                <p>Thank you,<br />
+                  <span>{formData.name}</span>
+                </p>
+              </div>
+            </Form.Group>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <CopyToClipboard text={template} onCopy={handleCopy}>
+                <Button variant="primary">Copy Template</Button>
+              </CopyToClipboard>
+              {copied && <Alert variant="success" className="m-0 py-1">Copied!</Alert>}
+            </div>
+            <Form.Group>
+              <Form.Label>Preview:</Form.Label>
+              <Form.Control as="textarea" rows={6} value={template} readOnly />
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
