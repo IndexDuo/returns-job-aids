@@ -18,6 +18,7 @@ const EmailTemplate = () => {
       setFormData(JSON.parse(savedData));
     }
   }, []);
+  
 
   const handleBlur = (field) => {
     let value = formData[field];
