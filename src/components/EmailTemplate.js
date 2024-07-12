@@ -1,5 +1,5 @@
 // src/components/EmailTemplate.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
 
@@ -12,26 +12,35 @@ const EmailTemplate = () => {
 
   const [copied, setCopied] = useState(false);
 
-  // Load data from cookies when the component mounts
+  const nameRef = useRef(null);
+  const phoneRef = useRef(null);
+  const trackingNumberRef = useRef(null);
+
   useEffect(() => {
+    // Load data from cookies if available
     const savedData = Cookies.get('userInfo');
     if (savedData) {
       setFormData(JSON.parse(savedData));
     }
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleBlur = (field) => {
+    let value = formData[field];
+    if (field === 'phone') {
+      // Apply phone number formatting
+      value = value.replace(/\D/g, ''); // Remove non-numeric characters
+      value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'); // Format as (123) 456-7890
+    }
+    setFormData({ ...formData, [field]: value });
+    Cookies.set('userInfo', JSON.stringify({ ...formData, [field]: value }), { expires: 0.375 });
+  };
+
+  const handleInput = (e, field) => {
+    setFormData({ ...formData, [field]: e.target.innerText });
   };
 
   const handleCopy = () => {
     setCopied(true);
-  };
-
-  const handleSaveToCookies = () => {
-    Cookies.set('userInfo', JSON.stringify(formData), { expires: 0.375 }); // 9 hours
-    alert('User information saved to cookies!');
   };
 
   const template = `
@@ -46,45 +55,45 @@ const EmailTemplate = () => {
   return (
     <div>
       <h2>Email Template</h2>
-      <form>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Phone:
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Tracking Number:
-          <input
-            type="text"
-            name="trackingNumber"
-            value={formData.trackingNumber}
-            onChange={handleChange}
-          />
-          <span title="Find this on the package">?</span>
-        </label>
-        <br />
-        <CopyToClipboard text={template} onCopy={handleCopy}>
-          <button type="button">Copy Template</button>
-        </CopyToClipboard>
-        {copied && <span style={{ color: 'green' }}>Copied!</span>}
-        <br />
-        <button type="button" onClick={handleSaveToCookies}>Save Info to Cookies</button>
-      </form>
+      <div>
+        <p>Dear [Customer],</p>
+        <p>
+          My name is <span
+            ref={nameRef}
+            contentEditable
+            suppressContentEditableWarning
+            onInput={(e) => handleInput(e, 'name')}
+            onBlur={() => handleBlur('name')}
+          >
+            {formData.name}
+          </span>.
+          I am contacting you regarding the return of the item with the tracking number <span
+            ref={trackingNumberRef}
+            contentEditable
+            suppressContentEditableWarning
+            onInput={(e) => handleInput(e, 'trackingNumber')}
+            onBlur={() => handleBlur('trackingNumber')}
+          >
+            {formData.trackingNumber}
+          </span>.
+          Please contact me at <span
+            ref={phoneRef}
+            contentEditable
+            suppressContentEditableWarning
+            onInput={(e) => handleInput(e, 'phone')}
+            onBlur={() => handleBlur('phone')}
+          >
+            {formData.phone}
+          </span> if you need any further information.
+        </p>
+        <p>Thank you,<br />
+          <span>{formData.name}</span>
+        </p>
+      </div>
+      <CopyToClipboard text={template} onCopy={handleCopy}>
+        <button type="button">Copy Template</button>
+      </CopyToClipboard>
+      {copied && <span style={{ color: 'green' }}>Copied!</span>}
       <h3>Preview</h3>
       <pre>{template}</pre>
     </div>
