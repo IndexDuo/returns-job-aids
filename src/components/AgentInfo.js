@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '../styles/AgentInfo.css';
+import "../styles/AgentInfo.css";
 
 const AgentInfo = () => {
     const [agentInfo, setAgentInfo] = useState({
         firstName: "",
         lastName: "",
     });
-
 
     useEffect(() => {
         // saved data should be agentInfo, which is their first and last name
@@ -27,19 +26,17 @@ const AgentInfo = () => {
         // Cookies.set('userInfo', JSON.stringify({ ...agentInfo, [field]: value }), { expires: 0.375 });
     };
 
-
-   
-
     return (
-        <Container className="mt-5">
-            <h2 className="mb-4">Agent Info</h2>
+        <Container className="agent-info-container">
+            <h2 className="custom-heading">Agent Info</h2>
             <Form>
                 <Row>
-                    <Col md={6}>
+                    <Col md={12}>
                         <Form.Group className="mb-3">
                             <Form.Label>First Name:</Form.Label>
                             <Form.Control
                                 type="text"
+                                className="custom-form-control"
                                 value={agentInfo.firstName}
                                 onChange={(e) =>
                                     setAgentInfo({
@@ -50,11 +47,12 @@ const AgentInfo = () => {
                             />
                         </Form.Group>
                     </Col>
-                    <Col md={6}>
+                    <Col md={12}>
                         <Form.Group className="mb-3">
                             <Form.Label>Last Name:</Form.Label>
                             <Form.Control
                                 type="text"
+                                className="custom-form-control"
                                 value={agentInfo.lastName}
                                 onChange={(e) =>
                                     setAgentInfo({
@@ -66,7 +64,6 @@ const AgentInfo = () => {
                         </Form.Group>
                     </Col>
                 </Row>
-
                 <Button
                     variant="primary"
                     onClick={() => {
@@ -78,7 +75,6 @@ const AgentInfo = () => {
                     Save
                 </Button>
             </Form>
-
         </Container>
     );
 };
