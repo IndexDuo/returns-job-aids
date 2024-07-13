@@ -5,7 +5,9 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
-        name: "",
+        memberName: "",
+        agentName: "",
+        agentLastName:"",
         phone: "",
         trackingNumber: "",
     });
