@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,25 +9,35 @@ const AgentInfo = () => {
         firstName: "",
         lastName: "",
     });
+    const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
-        // saved data should be agentInfo, which is their first and last name
+        // Load saved data from cookies
         const savedData = Cookies.get("agentInfo");
         if (savedData) {
             setAgentInfo(JSON.parse(savedData));
         }
     }, []);
 
-    const handleBlur = (field) => {
-        let value = agentInfo[field];
-        setAgentInfo({ ...agentInfo, [field]: value });
-        // cookies does not need to be saved for form data.
-        // Cookies.set('userInfo', JSON.stringify({ ...agentInfo, [field]: value }), { expires: 0.375 });
+    const handleSave = () => {
+        // Save agentInfo to cookies with 8 hours expiration time
+        Cookies.set("agentInfo", JSON.stringify(agentInfo), { expires: 1 / 3 }); // 8 hours
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 10000); // Hide message after 10 seconds
     };
 
     return (
         <Container className="agent-info-container">
             <h2 className="custom-heading">Agent Info</h2>
+            {showMessage && (
+                <Alert
+                    variant="success"
+                    onClose={() => setShowMessage(false)}
+                    dismissible
+                >
+                    Hello, {agentInfo.firstName}!
+                </Alert>
+            )}
             <Form>
                 <Row>
                     <Col md={12}>
@@ -64,14 +73,7 @@ const AgentInfo = () => {
                         </Form.Group>
                     </Col>
                 </Row>
-                <Button
-                    variant="primary"
-                    onClick={() => {
-                        Cookies.set("agentInfo", JSON.stringify(agentInfo), {
-                            expires: 0.375,
-                        });
-                    }}
-                >
+                <Button variant="primary" onClick={handleSave}>
                     Save
                 </Button>
             </Form>
