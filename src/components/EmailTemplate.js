@@ -188,8 +188,15 @@ www.costco.com
                             </Form.Control>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label >Template:</Form.Label>
-                            <div className="border p-3 rounded" style={{ fontFamily: "Times New Roman", fontSize: "14px" }}>
+                            <Form.Label>Template:</Form.Label>
+                            <div
+                                className="border p-3 rounded"
+                                style={{
+                                    fontFamily: "Times New Roman",
+                                    fontSize: "14px",
+                                    lineHeight: "1.5",
+                                }}
+                            >
                                 <p>
                                     {getGreeting(formData.timeZone)}{" "}
                                     <input
