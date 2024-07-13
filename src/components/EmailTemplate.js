@@ -53,11 +53,11 @@ const EmailTemplate = () => {
             value = value.replace(/\D/g, "");
             value = value.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
         }
-        setFormData({ ...formData, [field]: value });
+        setFormData({ [field]: value, ...formData });
     };
 
     const handleInput = (e, field) => {
-        setFormData({ ...formData, [field]: e.target.innerText });
+        setFormData({ [field]: e.target.innerText, ...formData });
     };
 
     const handleCopy = () => {
