@@ -17,7 +17,10 @@ function App() {
                 </div>
             </main>
             <footer>
-                <p>&copy; 2024 Returns Assistance Project By JINGY</p>
+                <p>
+                    &copy; 2024 Returns Assistance Project By{" "}
+                    <a href="https://www.indexduo.me">JINGY</a>
+                </p>
             </footer>
         </div>
     );
