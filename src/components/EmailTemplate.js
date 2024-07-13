@@ -20,7 +20,7 @@ const EmailTemplate = () => {
             const agentInfo = JSON.parse(savedData);
             return {
                 firstName: agentInfo.firstName || "",
-                lastName: agentInfo.lastName || ""
+                lastName: agentInfo.lastName || "",
             };
         }
         return { firstName: "", lastName: "" };
@@ -31,7 +31,7 @@ const EmailTemplate = () => {
         setFormData((prevData) => ({
             ...prevData,
             agentFirstName: initialAgentInfo.firstName,
-            agentLastName: initialAgentInfo.lastName
+            agentLastName: initialAgentInfo.lastName,
         }));
 
         const intervalId = setInterval(() => {
@@ -39,7 +39,7 @@ const EmailTemplate = () => {
             setFormData((prevData) => ({
                 ...prevData,
                 agentFirstName: currentAgentInfo.firstName,
-                agentLastName: currentAgentInfo.lastName
+                agentLastName: currentAgentInfo.lastName,
             }));
         }, 1000);
 
@@ -77,7 +77,8 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
         border: "none",
         borderBottom: "1px dotted #007bff",
         backgroundColor: "#f8f9fa",
-        minWidth: "50px",
+        // minWidth: "20px",
+        maxWidth: "100px",
         display: "inline-block",
         padding: "0 2px",
         outline: "none",
@@ -98,8 +99,12 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <input
                                         type="text"
                                         value={formData.agentFirstName}
-                                        onChange={(e) => handleInput(e, "agentFirstName")}
-                                        onBlur={() => handleBlur("agentFirstName")}
+                                        onChange={(e) =>
+                                            handleInput(e, "agentFirstName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentFirstName")
+                                        }
                                         style={inputStyle}
                                     />
                                     . I am contacting you regarding the return
@@ -107,15 +112,21 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <input
                                         type="text"
                                         value={formData.trackingNumber}
-                                        onChange={(e) => handleInput(e, "trackingNumber")}
-                                        onBlur={() => handleBlur("trackingNumber")}
+                                        onChange={(e) =>
+                                            handleInput(e, "trackingNumber")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("trackingNumber")
+                                        }
                                         style={inputStyle}
                                     />
                                     . Please contact me at{" "}
                                     <input
                                         type="text"
                                         value={formData.phone}
-                                        onChange={(e) => handleInput(e, "phone")}
+                                        onChange={(e) =>
+                                            handleInput(e, "phone")
+                                        }
                                         onBlur={() => handleBlur("phone")}
                                         style={inputStyle}
                                     />{" "}
@@ -127,7 +138,8 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <span>
                                         {formData.agentFirstName}{" "}
                                         {formData.agentLastName &&
-                                            formData.agentLastName.charAt(0) + "."}
+                                            formData.agentLastName.charAt(0) +
+                                                "."}
                                     </span>
                                 </p>
                             </div>
