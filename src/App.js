@@ -16,13 +16,13 @@ function App() {
         if (password === "123") {
             setIsAuthenticated(true);
         } else {
-            alert("Incorrect password. Please try again.");
-            checkPassword();
+            alert("Incorrect password. Access denied.");
+            // Instead of calling checkPassword again, we'll let the user refresh to try again
         }
     };
 
     if (!isAuthenticated) {
-        return null; // Or you could return a loading spinner here
+        return <div>Access denied. Please refresh the page to try again.</div>;
     }
 
     return (
