@@ -8,7 +8,7 @@ function App() {
     return (
         <div>
             <header>
-                <h1>Returns Assistance</h1>
+                <h1>Email Template Assistance</h1>
             </header>
             <main>
                 <AgentInfo />
