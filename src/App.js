@@ -10,7 +10,7 @@ function App() {
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
                 <div className="col-md-1 d-none d-md-block">
-                    <AgentInfo />
+                    {window.innerWidth >= 946 && <AgentInfo />}
                 </div>
                 <div className="col-md-15">
                     <EmailTemplate />
