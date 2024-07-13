@@ -6,7 +6,7 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
         memberName: "",
-        agentName: "",
+        agentFirstName: "",
         agentLastName:"",
         phone: "",
         trackingNumber: "",
@@ -36,14 +36,32 @@ const EmailTemplate = () => {
         const initialFirstName = getAgentFirstNameFromCookies();
         setFormData((prevData) => ({
             ...prevData,
-            name: initialFirstName,
+            agentFirstName: initialFirstName,
         }));
 
         const intervalId = setInterval(() => {
             const currentFirstName = getAgentFirstNameFromCookies();
             setFormData((prevData) => ({
                 ...prevData,
-                name: currentFirstName,
+                agentFirstName: currentFirstName,
+            }));
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    useEffect(() => {
+        const initialLastName = getAgentLastNameFromCookies();
+        setFormData((prevData) => ({
+            ...prevData,
+            agentLastName: initialLastName,
+        }));
+
+        const intervalId = setInterval(() => {
+            const currentLastName = getAgentLastNameFromCookies();
+            setFormData((prevData) => ({
+                ...prevData,
+                agentLastName: currentLastName,
             }));
         }, 1000);
 
