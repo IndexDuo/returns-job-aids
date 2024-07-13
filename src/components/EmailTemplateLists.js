@@ -4,7 +4,7 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
 
     useEffect(() => {
-        fetch("/emailTemplates.json")
+        fetch("../emailTemplates.json")
             .then((response) => response.json())
             .then((data) => setTemplates(data))
             .catch((error) =>
