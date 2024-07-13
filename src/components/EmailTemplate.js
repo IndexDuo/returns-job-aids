@@ -87,7 +87,7 @@ const EmailTemplate = () => {
         if (spanRef.current) {
             spanRef.current.textContent = input.value;
             const width = spanRef.current.offsetWidth;
-            input.style.width = `${width + 5}px`; // Add some padding for better look
+            input.style.width = `${width - 5}px`; // remove padding for small font change
         }
     };
 
@@ -192,7 +192,7 @@ www.costco.com
                             <div
                                 className="border p-3 rounded"
                                 style={{
-                                    fontFamily: "Times New Roman",
+                                    // fontFamily: "Times New Roman",
                                     fontSize: "14px",
                                     lineHeight: "1.5",
                                 }}
