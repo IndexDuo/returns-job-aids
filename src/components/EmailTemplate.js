@@ -12,14 +12,31 @@ const EmailTemplate = () => {
 
     const [copied, setCopied] = useState(false);
 
-    useEffect(() => {
+    const getAgentFirstNameFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
         if (savedData) {
             const agentInfo = JSON.parse(savedData);
-            if (agentInfo.firstName) {
-                setFormData({ ...formData, name: agentInfo.firstName });
-            }
+            return agentInfo.firstName || "";
         }
+        return "";
+    };
+
+    useEffect(() => {
+        const initialFirstName = getAgentFirstNameFromCookies();
+        setFormData((prevData) => ({
+            ...prevData,
+            name: initialFirstName,
+        }));
+
+        const intervalId = setInterval(() => {
+            const currentFirstName = getAgentFirstNameFromCookies();
+            setFormData((prevData) => ({
+                ...prevData,
+                name: currentFirstName,
+            }));
+        }, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const handleBlur = (field) => {
@@ -46,7 +63,7 @@ Dear [Customer],
 My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
 
 Thank you,
-${formData.name.charAt(0)}${formData.name.length > 1 ? "." : ""}
+${formData.name} ${formData.name.charAt(0)}${formData.name.length > 1 ? "." : ""}
   `;
 
     return (
