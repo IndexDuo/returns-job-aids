@@ -21,6 +21,9 @@ const EmailTemplate = () => {
         agentLastName: "",
         phone: "",
         trackingNumber: "",
+        orderNumber: "",
+        itemNumber: "",
+        itemDescription: "",
         timeZone: "Eastern",
         firstContact: "",
         pickupDate: "",
@@ -133,9 +136,9 @@ You have three options to schedule the return:
 
 Your order information:
 
-Order#: <Order Number>
-Item#: <Item Number>
-Item Description: <Item Description>
+Order#: ${formData.orderNumber}
+Item#: ${formData.itemNumber}
+Item Description: ${formData.itemDescription}
 
 To self-schedule, please visit https://logistics.costco.com/userselfschedule and enter your tracking number: ${formData.trackingNumber}
 
@@ -165,7 +168,7 @@ www.costco.com
                 <Col md={8} className="mx-auto">
                     <h2 className="mb-4">Email Template</h2>
                     <Form>
-                        <Form.Group className="mb-3">
+                        <Form.Group className="mb3">
                             <Form.Label>Time Zone:</Form.Label>
                             <Form.Control
                                 as="select"
