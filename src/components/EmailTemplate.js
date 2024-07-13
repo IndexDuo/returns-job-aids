@@ -12,13 +12,6 @@ const EmailTemplate = () => {
 
     const [copied, setCopied] = useState(false);
 
-    useEffect(() => {
-        // saved data should be agentInfo, which is their first and last name
-        const savedData = Cookies.get("agentInfo");
-        if (savedData) {
-            setFormData(JSON.parse(savedData));
-        }
-    }, []);
 
     const handleBlur = (field) => {
         let value = formData[field];
@@ -27,8 +20,6 @@ const EmailTemplate = () => {
             value = value.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
         }
         setFormData({ ...formData, [field]: value });
-        // cookies does not need to be saved for form data.
-        // Cookies.set('userInfo', JSON.stringify({ ...formData, [field]: value }), { expires: 0.375 });
     };
 
     const handleInput = (e, field) => {
