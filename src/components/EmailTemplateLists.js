@@ -4,9 +4,10 @@ import emailTemplates from "../emailTemplates.json";
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
 
-
-
-    
+    useEffect(() => {
+        setTemplates(emailTemplates);
+    }, []);
+    // console.log(templates[0].name);
 
     return (
         <div>
