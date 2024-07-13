@@ -4,6 +4,16 @@ import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { FaCalendarAlt } from "react-icons/fa";
 
+const timeZoneMap = {
+    Hawaii: "Pacific/Honolulu",
+    Alaska: "America/Anchorage",
+    Pacific: "America/Los_Angeles",
+    Mountain: "America/Denver",
+    Central: "America/Chicago",
+    Eastern: "America/New_York",
+    Atlantic: "America/Puerto_Rico",
+};
+
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
         memberName: "",
@@ -87,7 +97,7 @@ const EmailTemplate = () => {
         const currentHour = new Date().toLocaleTimeString("en-US", {
             hour: "2-digit",
             hour12: false,
-            timeZone,
+            timeZone: timeZoneMap[timeZone],
         });
         return currentHour < 12 ? "Good Morning" : "Good Afternoon";
     };
@@ -277,17 +287,20 @@ www.costco.com
                                     </li>
                                 </ul>
                                 <p>
-                                    To self-schedule, please visit
-                                    https://logistics.costco.com/userselfschedule
+                                    To self-schedule, please visit{" "}
+                                    <a
+                                        href="https://logistics.costco.com/userselfschedule"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        https://logistics.costco.com/userselfschedule
+                                    </a>{" "}
                                     and enter your tracking number:{" "}
                                     <input
                                         type="text"
                                         value={formData.trackingNumber}
                                         onChange={(e) =>
                                             handleInput(e, "trackingNumber")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("trackingNumber")
                                         }
                                         style={inputStyle}
                                         className="auto-width-input"
@@ -319,7 +332,12 @@ www.costco.com
                                     <input
                                         type="text"
                                         value={formData.agentLastName.charAt(0)}
-                                        readOnly
+                                        onChange={(e) =>
+                                            handleInput(e, "agentLastName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentLastName")
+                                        }
                                         style={inputStyle}
                                         className="auto-width-input"
                                     />
@@ -327,33 +345,37 @@ www.costco.com
                                         ? "."
                                         : ""}
                                 </p>
-                                <p>Costco Logistics Returns Specialist</p>
                                 <p>
+                                    Costco Logistics Returns Specialist
+                                    <br />
                                     Costco Member Service Center |
                                     1-800-955-2292
+                                    <br />
+                                    <a
+                                        href="https://www.costco.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        www.costco.com
+                                    </a>
                                 </p>
-                                <p>www.costco.com</p>
                             </div>
                         </Form.Group>
+                        <CopyToClipboard text={template} onCopy={handleCopy}>
+                            <Button variant="primary">Copy Template</Button>
+                        </CopyToClipboard>
+                        {copied && (
+                            <Alert variant="success" className="mt-3">
+                                Template copied to clipboard!
+                            </Alert>
+                        )}
                     </Form>
-                    <CopyToClipboard text={template} onCopy={handleCopy}>
-                        <Button variant="primary">Copy to Clipboard</Button>
-                    </CopyToClipboard>
-                    {copied && (
-                        <Alert variant="success" className="mt-3">
-                            Template copied to clipboard!
-                        </Alert>
-                    )}
+                    <span
+                        ref={spanRef}
+                        style={{ visibility: "hidden", whiteSpace: "pre" }}
+                    ></span>
                 </Col>
             </Row>
-            <span
-                ref={spanRef}
-                style={{
-                    position: "absolute",
-                    visibility: "hidden",
-                    whiteSpace: "nowrap",
-                }}
-            ></span>
         </Container>
     );
 };
