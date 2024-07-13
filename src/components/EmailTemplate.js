@@ -213,18 +213,33 @@ www.costco.com
                                 </p>
                                 <p>
                                     My name is{" "}
-                                    <input
-                                        type="text"
-                                        value={formData.agentFirstName}
-                                        onChange={(e) =>
-                                            handleInput(e, "agentFirstName")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("agentFirstName")
-                                        }
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />{" "}
+                                    {formData.agentFirstName ? (
+                                        <input
+                                            type="text"
+                                            value={formData.agentFirstName}
+                                            onChange={(e) =>
+                                                handleInput(e, "agentFirstName")
+                                            }
+                                            onBlur={() =>
+                                                handleBlur("agentFirstName")
+                                            }
+                                            style={inputStyle}
+                                            className="auto-width-input"
+                                        />
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            placeholder="Type your name here"
+                                            onChange={(e) =>
+                                                handleInput(e, "agentFirstName")
+                                            }
+                                            onBlur={() =>
+                                                handleBlur("agentFirstName")
+                                            }
+                                            style={inputStyle}
+                                            className="auto-width-input"
+                                        />
+                                    )}{" "}
                                     and I am part of the Costco Logistics
                                     Returns team. We attempted to reach you at
                                     Phone#{" "}
