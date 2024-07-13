@@ -199,7 +199,6 @@ www.costco.com
                     <div
                         className="border p-3 rounded"
                         style={{
-                            // fontFamily: "Times New Roman",
                             fontSize: "14px",
                             lineHeight: "1.5",
                         }}
@@ -271,56 +270,61 @@ www.costco.com
                                 <FaCalendarAlt />
                             </Button>
                         </p>
-                        <p>You have three options to schedule the return:</p>
-                        <ol>
-                            <li>
-                                Contact us at 1-800-955-2292 to be assisted by
-                                one of our agents.
-                            </li>
-                            <li>
-                                Self-schedule using the link provided below.
-                            </li>
-                            <li>Return to your local warehouse.</li>
-                        </ol>
+                        <p>
+                            You have three options to schedule the return:
+                            <ol>
+                                <li>
+                                    Contact us at 1-800-955-2292 to be assisted
+                                    by one of our agents.
+                                </li>
+                                <li>
+                                    Self-schedule using the link provided below.
+                                </li>
+                                <li>Return to your local warehouse.</li>
+                            </ol>
+                        </p>
                         <p>Your order information:</p>
-                        Order#:{" "}
-                        <input
-                            type="text"
-                            placeholder="<Order Number>"
-                            value={formData.orderNumber}
-                            onChange={(e) => handleInput(e, "orderNumber")}
-                            style={inputStyle}
-                            className="auto-width-input"
-                        />
-                        <br />
-                        Item#:{" "}
-                        <input
-                            type="text"
-                            placeholder="<Item Number>"
-                            value={formData.itemNumber}
-                            onChange={(e) => handleInput(e, "itemNumber")}
-                            style={inputStyle}
-                            className="auto-width-input"
-                        />
-                        <br />
-                        Item Description:{" "}
-                        <input
-                            type="text"
-                            placeholder="<Item Description>"
-                            value={formData.itemDescription}
-                            onChange={(e) => handleInput(e, "itemDescription")}
-                            style={inputStyle}
-                            className="auto-width-input"
-                        />
-                        <br />
-                        <br />
+                        <p>
+                            Order#:{" "}
+                            <input
+                                type="text"
+                                placeholder="<Order Number>"
+                                value={formData.orderNumber}
+                                onChange={(e) => handleInput(e, "orderNumber")}
+                                onBlur={() => handleBlur("orderNumber")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                        </p>
+                        <p>
+                            Item#:{" "}
+                            <input
+                                type="text"
+                                placeholder="<Item Number>"
+                                value={formData.itemNumber}
+                                onChange={(e) => handleInput(e, "itemNumber")}
+                                onBlur={() => handleBlur("itemNumber")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                        </p>
+                        <p>
+                            Item Description:{" "}
+                            <input
+                                type="text"
+                                placeholder="<Item Description>"
+                                value={formData.itemDescription}
+                                onChange={(e) =>
+                                    handleInput(e, "itemDescription")
+                                }
+                                onBlur={() => handleBlur("itemDescription")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                        </p>
                         <p>
                             To self-schedule, please visit{" "}
-                            <a
-                                href="https://logistics.costco.com/userselfschedule"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <a href="https://logistics.costco.com/userselfschedule">
                                 https://logistics.costco.com/userselfschedule
                             </a>{" "}
                             and enter your tracking number:{" "}
@@ -331,6 +335,7 @@ www.costco.com
                                 onChange={(e) =>
                                     handleInput(e, "trackingNumber")
                                 }
+                                onBlur={() => handleBlur("trackingNumber")}
                                 style={inputStyle}
                                 className="auto-width-input"
                             />
@@ -345,58 +350,50 @@ www.costco.com
                             wonderful day!
                         </p>
                         <p>
-                            <input
-                                type="text"
-                                placeholder="<First Name>"
-                                value={formData.agentFirstName}
-                                onChange={(e) =>
-                                    handleInput(e, "agentFirstName")
-                                }
-                                onBlur={() => handleBlur("agentFirstName")}
-                                style={inputStyle}
-                                className="auto-width-input"
-                            />{" "}
-                            <input
-                                type="text"
-                                placeholder="<Last Initial>"
-                                value={formData.agentLastName.charAt(0)}
-                                onChange={(e) =>
-                                    handleInput(e, "agentLastName")
-                                }
-                                onBlur={() => handleBlur("agentLastName")}
-                                style={inputStyle}
-                                className="auto-width-input"
-                            />
+                            {formData.agentFirstName}{" "}
+                            {formData.agentLastName.charAt(0)}
                             {formData.agentLastName.length > 1 ? "." : ""}
-                        </p>
-                        <p>
+                            <br />
                             Costco Logistics Returns Specialist
                             <br />
                             Costco Member Service Center | 1-800-955-2292
                             <br />
-                            <a
-                                href="https://www.costco.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                www.costco.com
-                            </a>
+                            www.costco.com
                         </p>
                     </div>
                 </Form.Group>
                 <CopyToClipboard text={template} onCopy={handleCopy}>
-                    <Button variant="primary">Copy Template</Button>
+                    <Button
+                        style={{
+                            backgroundColor: "#007bff",
+                            color: "white",
+                            border: "none",
+                        }}
+                        className="mt-3"
+                    >
+                        Copy to Clipboard
+                    </Button>
                 </CopyToClipboard>
                 {copied && (
-                    <Alert variant="success" className="mt-3">
+                    <Alert
+                        variant="success"
+                        className="mt-3"
+                        style={{ width: "100%" }}
+                    >
                         Template copied to clipboard!
                     </Alert>
                 )}
             </Form>
             <span
                 ref={spanRef}
-                style={{ visibility: "hidden", whiteSpace: "pre" }}
-            ></span>
+                style={{
+                    position: "absolute",
+                    top: "-9999px",
+                    left: "-9999px",
+                    visibility: "hidden",
+                    whiteSpace: "pre",
+                }}
+            />
         </Container>
     );
 };
