@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const EmailTemplate = () => {
     const [agentInfo, setAgentInfo] = useState({
@@ -56,8 +57,10 @@ ${formData.name}
 
     return (
         <Container className="mt-5">
-                    <h2 className="mb-4">Agent Info</h2>
-                    <Form>
+            <h2 className="mb-4">Agent Info</h2>
+            <Form>
+                <Row>
+                    <Col md={6}>
                         <Form.Group className="mb-3">
                             <Form.Label>First Name:</Form.Label>
                             <Form.Control
@@ -71,6 +74,8 @@ ${formData.name}
                                 }
                             />
                         </Form.Group>
+                    </Col>
+                    <Col md={6}>
                         <Form.Group className="mb-3">
                             <Form.Label>Last Name:</Form.Label>
                             <Form.Control
@@ -84,22 +89,21 @@ ${formData.name}
                                 }
                             />
                         </Form.Group>
-                        <Button
-                            variant="primary"
-                            onClick={() => {
-                                Cookies.set(
-                                    "agentInfo",
-                                    JSON.stringify(agentInfo),
-                                    {
-                                        expires: 0.375,
-                                    }
-                                );
-                            }}
-                        >
-                            Save
-                        </Button>
-                    </Form>
-            
+                    </Col>
+                </Row>
+
+                <Button
+                    variant="primary"
+                    onClick={() => {
+                        Cookies.set("agentInfo", JSON.stringify(agentInfo), {
+                            expires: 0.375,
+                        });
+                    }}
+                >
+                    Save
+                </Button>
+            </Form>
+
             <Row>
                 <Col md={8} className="mx-auto">
                     <h2 className="mb-4">Email Template</h2>
