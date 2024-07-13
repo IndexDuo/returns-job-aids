@@ -73,6 +73,13 @@ Thank you,
 ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLastName.length > 1 ? "." : ""}
   `;
 
+    const spanStyle = {
+        borderBottom: "1px dotted #007bff",
+        cursor: "text",
+        backgroundColor: "#f8f9fa",
+        padding: "0 2px",
+    };
+
     return (
         <Container className="mt-5">
             <Row>
@@ -98,6 +105,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                             __html: formData.agentFirstName,
                                         }}
                                         className="text-primary"
+                                        style={spanStyle}
                                     ></span>
                                     . I am contacting you regarding the return
                                     of the item with the tracking number{" "}
@@ -114,6 +122,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                             __html: formData.trackingNumber,
                                         }}
                                         className="text-primary"
+                                        style={spanStyle}
                                     ></span>
                                     . Please contact me at{" "}
                                     <span
@@ -125,6 +134,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                             __html: formData.phone,
                                         }}
                                         className="text-primary"
+                                        style={spanStyle}
                                     ></span>{" "}
                                     if you need any further information.
                                 </p>
