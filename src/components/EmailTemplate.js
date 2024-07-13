@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { FaCalendarAlt } from "../../src/logo.svg";
+import { FaCalendarAlt } from "react-icons/fa";
 
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
