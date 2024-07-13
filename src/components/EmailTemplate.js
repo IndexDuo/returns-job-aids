@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import "../styles/EmailTemplate.css";
 
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
@@ -78,7 +79,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
         cursor: "text",
         backgroundColor: "#f8f9fa",
         padding: "0 2px",
-        minWidth: "500px",
+        paddingRight: "70px",
     };
 
     return (
@@ -134,7 +135,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                         dangerouslySetInnerHTML={{
                                             __html: formData.phone,
                                         }}
-                                        className="text-primary"
+                                        className="text-primary wide-span"
                                         style={spanStyle}
                                     ></span>{" "}
                                     if you need any further information.
