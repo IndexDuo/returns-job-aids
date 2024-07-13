@@ -124,40 +124,33 @@ const EmailTemplate = () => {
     };
 
     const template = `
-    <div style="font-family: 'Times New Roman', Times, serif; font-size: 14px;">
-        ${getGreeting(formData.timeZone)} ${formData.memberName},
-        <br/><br/>
-        My name is ${formData.agentFirstName} and I am part of the Costco Logistics Returns team. We attempted to reach you at Phone# ${formData.phone} to schedule your return pickup. Please be advised that your pickup needs to be scheduled by ${formData.pickupDate || "10 business days from First Contact"} to avoid cancellation of your return.
-        <br/><br/>
-        You have three options to schedule the return:
-        <ol>
-            <li>Contact us at 1-800-955-2292 to be assisted by one of our agents.</li>
-            <li>Self-schedule using the link provided below.</li>
-            <li>Return to your local warehouse.</li>
-        </ol>
-        <br/>
-        Your order information:
-        <ul>
-            <li>Order#: ${formData.orderNumber}</li>
-            <li>Item#: ${formData.itemNumber}</li>
-            <li>Item Description: ${formData.itemDescription}</li>
-        </ul>
-        <br/>
-        To self-schedule, please visit <a href="https://logistics.costco.com/userselfschedule" target="_blank" rel="noopener noreferrer">https://logistics.costco.com/userselfschedule</a> and enter your tracking number: ${formData.trackingNumber}
-        <br/><br/>
-        If you have decided to keep your item, please let us know by replying to this email or giving us a call. We would love to hear from you.
-        <br/><br/>
-        We look forward to hearing from you soon. Have a wonderful day!
-        <br/><br/>
-        ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLastName.length > 1 ? "." : ""}
-        <br/><br/>
-        Costco Logistics Returns Specialist
-        <br/>
-        Costco Member Service Center | 1-800-955-2292
-        <br/>
-        <a href="https://www.costco.com" target="_blank" rel="noopener noreferrer">www.costco.com</a>
-    </div>
-    `;
+${getGreeting(formData.timeZone)} ${formData.memberName},
+
+My name is ${formData.agentFirstName} and I am part of the Costco Logistics Returns team. We attempted to reach you at Phone# ${formData.phone} to schedule your return pickup. Please be advised that your pickup needs to be scheduled by ${formData.pickupDate || "10 business days from First Contact"} to avoid cancellation of your return.
+
+You have three options to schedule the return:
+
+1. Contact us at 1-800-955-2292 to be assisted by one of our agents.
+2. Self-schedule using the link provided below.
+3. Return to your local warehouse.
+
+Your order information:
+
+Order#: ${formData.orderNumber}
+Item#: ${formData.itemNumber}
+Item Description: ${formData.itemDescription}
+
+To self-schedule, please visit https://logistics.costco.com/userselfschedule and enter your tracking number: ${formData.trackingNumber}
+
+If you have decided to keep your item, please let us know by replying to this email or giving us a call. We would love to hear from you.
+
+We look forward to hearing from you soon. Have a wonderful day!
+
+${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLastName.length > 1 ? "." : ""}
+Costco Logistics Returns Specialist
+Costco Member Service Center | 1-800-955-2292
+www.costco.com
+  `;
 
     const inputStyle = {
         border: "none",
@@ -196,18 +189,198 @@ const EmailTemplate = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Template:</Form.Label>
-                            <div
-                                className="border p-3 rounded"
-                                style={{
-                                    fontFamily: "Times New Roman",
-                                    fontSize: "14px",
-                                }}
-                            >
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: template,
-                                    }}
-                                />
+                            <div className="border p-3 rounded">
+                                <p>
+                                    {getGreeting(formData.timeZone)}{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.memberName}
+                                        onChange={(e) =>
+                                            handleInput(e, "memberName")
+                                        }
+                                        onBlur={() => handleBlur("memberName")}
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />
+                                    ,
+                                </p>
+                                <p>
+                                    My name is{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.agentFirstName}
+                                        onChange={(e) =>
+                                            handleInput(e, "agentFirstName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentFirstName")
+                                        }
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />{" "}
+                                    and I am part of the Costco Logistics
+                                    Returns team. We attempted to reach you at
+                                    Phone#{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.phone}
+                                        onChange={(e) =>
+                                            handleInput(e, "phone")
+                                        }
+                                        onBlur={() => handleBlur("phone")}
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />{" "}
+                                    to schedule your return pickup. Please be
+                                    advised that your pickup needs to be
+                                    scheduled by{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.pickupDate}
+                                        onChange={(e) =>
+                                            handleInput(e, "pickupDate")
+                                        }
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />{" "}
+                                    to avoid cancellation of your return.
+                                    <Button
+                                        variant="link"
+                                        onClick={handlePickupDateCalculation}
+                                    >
+                                        <FaCalendarAlt />
+                                    </Button>
+                                </p>
+                                <p>
+                                    You have three options to schedule the
+                                    return:
+                                </p>
+                                <ol>
+                                    <li>
+                                        Contact us at 1-800-955-2292 to be
+                                        assisted by one of our agents.
+                                    </li>
+                                    <li>
+                                        Self-schedule using the link provided
+                                        below.
+                                    </li>
+                                    <li>Return to your local warehouse.</li>
+                                </ol>
+                                <p>Your order information:</p>
+                                <ul>
+                                    <li>
+                                        Order#:{" "}
+                                        <input
+                                            type="text"
+                                            value={formData.orderNumber}
+                                            onChange={(e) =>
+                                                handleInput(e, "orderNumber")
+                                            }
+                                            style={inputStyle}
+                                            className="auto-width-input"
+                                        />
+                                    </li>
+                                    <li>
+                                        Item#:{" "}
+                                        <input
+                                            type="text"
+                                            value={formData.itemNumber}
+                                            onChange={(e) =>
+                                                handleInput(e, "itemNumber")
+                                            }
+                                            style={inputStyle}
+                                            className="auto-width-input"
+                                        />
+                                    </li>
+                                    <li>
+                                        Item Description:{" "}
+                                        <input
+                                            type="text"
+                                            value={formData.itemDescription}
+                                            onChange={(e) =>
+                                                handleInput(
+                                                    e,
+                                                    "itemDescription"
+                                                )
+                                            }
+                                            style={inputStyle}
+                                            className="auto-width-input"
+                                        />
+                                    </li>
+                                </ul>
+                                <p>
+                                    To self-schedule, please visit{" "}
+                                    <a
+                                        href="https://logistics.costco.com/userselfschedule"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        https://logistics.costco.com/userselfschedule
+                                    </a>{" "}
+                                    and enter your tracking number:{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.trackingNumber}
+                                        onChange={(e) =>
+                                            handleInput(e, "trackingNumber")
+                                        }
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />
+                                </p>
+                                <p>
+                                    If you have decided to keep your item,
+                                    please let us know by replying to this email
+                                    or giving us a call. We would love to hear
+                                    from you.
+                                </p>
+                                <p>
+                                    We look forward to hearing from you soon.
+                                    Have a wonderful day!
+                                </p>
+                                <p>
+                                    <input
+                                        type="text"
+                                        value={formData.agentFirstName}
+                                        onChange={(e) =>
+                                            handleInput(e, "agentFirstName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentFirstName")
+                                        }
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />{" "}
+                                    <input
+                                        type="text"
+                                        value={formData.agentLastName.charAt(0)}
+                                        onChange={(e) =>
+                                            handleInput(e, "agentLastName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentLastName")
+                                        }
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />
+                                    {formData.agentLastName.length > 1
+                                        ? "."
+                                        : ""}
+                                </p>
+                                <p>
+                                    Costco Logistics Returns Specialist
+                                    <br />
+                                    Costco Member Service Center |
+                                    1-800-955-2292
+                                    <br />
+                                    <a
+                                        href="https://www.costco.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        www.costco.com
+                                    </a>
+                                </p>
                             </div>
                         </Form.Group>
                         <CopyToClipboard text={template} onCopy={handleCopy}>
