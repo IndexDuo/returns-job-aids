@@ -7,7 +7,7 @@ const EmailTemplate = () => {
     const [formData, setFormData] = useState({
         memberName: "",
         agentFirstName: "",
-        agentLastName:"",
+        agentLastName: "",
         phone: "",
         trackingNumber: "",
     });
@@ -30,7 +30,7 @@ const EmailTemplate = () => {
             return agentInfo.lastName || "";
         }
         return "";
-    }
+    };
 
     useEffect(() => {
         const initialFirstName = getAgentFirstNameFromCookies();
@@ -89,10 +89,10 @@ const EmailTemplate = () => {
     const template = `
 Dear [Customer],
 
-My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
+My name is ${formData.agentFirstName}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
 
 Thank you,
-${formData.name} ${formData.name.charAt(0)}${formData.name.length > 1 ? "." : ""}
+${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLastName.length > 1 ? "." : ""}
   `;
 
     return (
