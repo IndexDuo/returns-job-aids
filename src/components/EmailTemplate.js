@@ -284,6 +284,7 @@ www.costco.com
                                     style={inputStyle}
                                     className="auto-width-input"
                                 />
+                                <br />
                                 Item#:{" "}
                                 <input
                                     type="text"
@@ -294,6 +295,7 @@ www.costco.com
                                     style={inputStyle}
                                     className="auto-width-input"
                                 />
+                                <br />
                                 Item Description:{" "}
                                 <input
                                     type="text"
@@ -304,6 +306,8 @@ www.costco.com
                                     style={inputStyle}
                                     className="auto-width-input"
                                 />
+                                <br />
+                                <br />
                                 <p>
                                     To self-schedule, please visit{" "}
                                     <a
