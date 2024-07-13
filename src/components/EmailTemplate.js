@@ -14,54 +14,32 @@ const EmailTemplate = () => {
 
     const [copied, setCopied] = useState(false);
 
-    const getAgentFirstNameFromCookies = () => {
+    const getAgentInfoFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
         if (savedData) {
             const agentInfo = JSON.parse(savedData);
-            return agentInfo.firstName || "";
+            return {
+                firstName: agentInfo.firstName || "",
+                lastName: agentInfo.lastName || "",
+            };
         }
-        return "";
-    };
-
-    const getAgentLastNameFromCookies = () => {
-        const savedData = Cookies.get("agentInfo");
-        if (savedData) {
-            const agentInfo = JSON.parse(savedData);
-            return agentInfo.lastName || "";
-        }
-        return "";
+        return { firstName: "", lastName: "" };
     };
 
     useEffect(() => {
-        const initialFirstName = getAgentFirstNameFromCookies();
+        const initialAgentInfo = getAgentInfoFromCookies();
         setFormData((prevData) => ({
             ...prevData,
-            agentFirstName: initialFirstName,
+            agentFirstName: initialAgentInfo.firstName,
+            agentLastName: initialAgentInfo.lastName,
         }));
 
         const intervalId = setInterval(() => {
-            const currentFirstName = getAgentFirstNameFromCookies();
+            const currentAgentInfo = getAgentInfoFromCookies();
             setFormData((prevData) => ({
                 ...prevData,
-                agentFirstName: currentFirstName,
-            }));
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
-    useEffect(() => {
-        const initialLastName = getAgentLastNameFromCookies();
-        setFormData((prevData) => ({
-            ...prevData,
-            agentLastName: initialLastName,
-        }));
-
-        const intervalId = setInterval(() => {
-            const currentLastName = getAgentLastNameFromCookies();
-            setFormData((prevData) => ({
-                ...prevData,
-                agentLastName: currentLastName,
+                agentFirstName: currentAgentInfo.firstName,
+                agentLastName: currentAgentInfo.lastName,
             }));
         }, 1000);
 
@@ -78,7 +56,7 @@ const EmailTemplate = () => {
     };
 
     const handleInput = (e, field) => {
-        setFormData({ [field]: e.target.innerText, ...formData });
+        setFormData({ ...formData, [field]: e.target.innerText });
     };
 
     const handleCopy = () => {
@@ -110,10 +88,14 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <span
                                         contentEditable
                                         suppressContentEditableWarning
-                                        onInput={(e) => handleInput(e, "name")}
-                                        onBlur={() => handleBlur("name")}
+                                        onInput={(e) =>
+                                            handleInput(e, "agentFirstName")
+                                        }
+                                        onBlur={() =>
+                                            handleBlur("agentFirstName")
+                                        }
                                         dangerouslySetInnerHTML={{
-                                            __html: formData.name,
+                                            __html: formData.agentFirstName,
                                         }}
                                         className="text-primary"
                                     ></span>
@@ -150,9 +132,10 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     Thank you,
                                     <br />
                                     <span>
-                                        {formData.name}{" "}
-                                        {formData.name &&
-                                            formData.name.charAt(0) + "."}
+                                        {formData.agentFirstName}{" "}
+                                        {formData.agentLastName &&
+                                            formData.agentLastName.charAt(0) +
+                                                "."}
                                     </span>
                                 </p>
                             </div>
