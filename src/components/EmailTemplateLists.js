@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import emailTemplates from "../emailTemplates.json";
 import { Button, Container, ListGroup } from "react-bootstrap";
+import "../styles/templateList.css";
 
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
@@ -10,7 +11,7 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
     }, []);
 
     return (
-        <Container>
+        <Container className="template-list-container">
             <h4>Select an Email Template</h4>
             <ListGroup>
                 {templates.map((template) => (
