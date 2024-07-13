@@ -166,7 +166,9 @@ www.costco.com
         <Container className="mt-5">
             <Row>
                 <Col md={8} className="mx-auto">
-                    <h2 className="mb-4">Email Template</h2>
+                    <h2 className="mb-4" style={{ marginTop: "-40px", paddingBottom:"-40px" }}>
+                        Email Template
+                    </h2>
                     <Form>
                         <Form.Group className="mb3">
                             <Form.Label>Time Zone:</Form.Label>
