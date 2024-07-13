@@ -4,6 +4,18 @@
 
 6/20: started documentation for purpose, proposal, and features 
 
+7/11: started the code...
+
+7/13: time zone IANA names 
+
+Hawaii: Pacific/Honolulu
+Alaska: America/Anchorage
+Pacific: America/Los_Angeles
+Mountain: America/Denver
+Central: America/Chicago
+Eastern: America/New_York
+Atlantic (Puerto Rico): America/Puerto_Rico
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
