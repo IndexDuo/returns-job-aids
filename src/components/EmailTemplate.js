@@ -21,6 +21,15 @@ const EmailTemplate = () => {
         return "";
     };
 
+    const getAgentLastNameFromCookies = () => {
+        const savedData = Cookies.get("agentInfo");
+        if (savedData) {
+            const agentInfo = JSON.parse(savedData);
+            return agentInfo.lastName || "";
+        }
+        return "";
+    }
+
     useEffect(() => {
         const initialFirstName = getAgentFirstNameFromCookies();
         setFormData((prevData) => ({
