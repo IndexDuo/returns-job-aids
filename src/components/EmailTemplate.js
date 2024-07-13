@@ -230,7 +230,7 @@ www.costco.com
                                     ) : (
                                         <input
                                             type="text"
-                                            placeholder="Type your name here"
+                                            placeholder="<First Name>"
                                             onChange={(e) =>
                                                 handleInput(e, "agentFirstName")
                                             }
@@ -246,6 +246,7 @@ www.costco.com
                                     Phone#{" "}
                                     <input
                                         type="text"
+                                        placeholder="<Phone Number>"
                                         value={formData.phone}
                                         onChange={(e) =>
                                             handleInput(e, "phone")
@@ -259,6 +260,7 @@ www.costco.com
                                     scheduled by{" "}
                                     <input
                                         type="text"
+                                        placeholder="<10 business days from First Contact>"
                                         value={formData.pickupDate}
                                         onChange={(e) =>
                                             handleInput(e, "pickupDate")
@@ -293,6 +295,7 @@ www.costco.com
                                 Order#:{" "}
                                 <input
                                     type="text"
+                                    placeholder="<Order Number>"
                                     value={formData.orderNumber}
                                     onChange={(e) =>
                                         handleInput(e, "orderNumber")
@@ -304,6 +307,7 @@ www.costco.com
                                 Item#:{" "}
                                 <input
                                     type="text"
+                                    placeholder="<Item Number>"
                                     value={formData.itemNumber}
                                     onChange={(e) =>
                                         handleInput(e, "itemNumber")
@@ -315,6 +319,7 @@ www.costco.com
                                 Item Description:{" "}
                                 <input
                                     type="text"
+                                    placeholder="<Item Description>"
                                     value={formData.itemDescription}
                                     onChange={(e) =>
                                         handleInput(e, "itemDescription")
@@ -336,6 +341,7 @@ www.costco.com
                                     and enter your tracking number:{" "}
                                     <input
                                         type="text"
+                                        placeholder="<Tracking Number>"
                                         value={formData.trackingNumber}
                                         onChange={(e) =>
                                             handleInput(e, "trackingNumber")
@@ -357,6 +363,7 @@ www.costco.com
                                 <p>
                                     <input
                                         type="text"
+                                        placeholder="<First Name>"
                                         value={formData.agentFirstName}
                                         onChange={(e) =>
                                             handleInput(e, "agentFirstName")
@@ -369,6 +376,7 @@ www.costco.com
                                     />{" "}
                                     <input
                                         type="text"
+                                        placeholder="<Last Initial>"
                                         value={formData.agentLastName.charAt(0)}
                                         onChange={(e) =>
                                             handleInput(e, "agentLastName")
