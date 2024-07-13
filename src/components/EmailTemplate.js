@@ -274,47 +274,36 @@ www.costco.com
                                     <li>Return to your local warehouse.</li>
                                 </ol>
                                 <p>Your order information:</p>
-                                <ul>
-                                    <li>
-                                        Order#:{" "}
-                                        <input
-                                            type="text"
-                                            value={formData.orderNumber}
-                                            onChange={(e) =>
-                                                handleInput(e, "orderNumber")
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        />
-                                    </li>
-                                    <li>
-                                        Item#:{" "}
-                                        <input
-                                            type="text"
-                                            value={formData.itemNumber}
-                                            onChange={(e) =>
-                                                handleInput(e, "itemNumber")
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        />
-                                    </li>
-                                    <li>
-                                        Item Description:{" "}
-                                        <input
-                                            type="text"
-                                            value={formData.itemDescription}
-                                            onChange={(e) =>
-                                                handleInput(
-                                                    e,
-                                                    "itemDescription"
-                                                )
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        />
-                                    </li>
-                                </ul>
+                                Order#:{" "}
+                                <input
+                                    type="text"
+                                    value={formData.orderNumber}
+                                    onChange={(e) =>
+                                        handleInput(e, "orderNumber")
+                                    }
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
+                                Item#:{" "}
+                                <input
+                                    type="text"
+                                    value={formData.itemNumber}
+                                    onChange={(e) =>
+                                        handleInput(e, "itemNumber")
+                                    }
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
+                                Item Description:{" "}
+                                <input
+                                    type="text"
+                                    value={formData.itemDescription}
+                                    onChange={(e) =>
+                                        handleInput(e, "itemDescription")
+                                    }
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
                                 <p>
                                     To self-schedule, please visit{" "}
                                     <a
