@@ -7,6 +7,11 @@ import EmailTemplateLists from "./components/EmailTemplateLists.js";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
+
+    const handleSelectTemplate = (template) => {
+        setSelectedTemplate(template);
+    };
 
     useEffect(() => {
         const storedPassword = localStorage.getItem("password");
@@ -37,12 +42,23 @@ function App() {
         <div className="container">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-md-1 d-none d-md-block">
+                <div className="col-md-2 d-none d-md-block">
                     {window.innerWidth >= 967 && <AgentInfo />}
-                    <EmailTemplateLists />
+                    {window.innerWidth >= 967 && (
+                        <EmailTemplateLists
+                            onSelectTemplate={handleSelectTemplate}
+                        />
+                    )}
                 </div>
                 <div className="col-md-10">
-                    <EmailTemplate />
+                    {window.innerWidth < 967 && (
+                        <EmailTemplateLists
+                            onSelectTemplate={handleSelectTemplate}
+                        />
+                    )}
+                    {selectedTemplate && (
+                        <EmailTemplate template={selectedTemplate} />
+                    )}
                 </div>
             </main>
             <footer style={{ marginTop: "-40px", textAlign: "right" }}>

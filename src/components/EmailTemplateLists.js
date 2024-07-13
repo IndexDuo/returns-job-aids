@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import emailTemplates from "../emailTemplates.json";
+import { Button, Container, ListGroup } from "react-bootstrap";
 
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
@@ -7,21 +8,23 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
     useEffect(() => {
         setTemplates(emailTemplates);
     }, []);
-    // console.log(templates[0].name);
 
     return (
-        <div>
+        <Container>
             <h4>Select an Email Template</h4>
-            <ul>
+            <ListGroup>
                 {templates.map((template) => (
-                    <li key={template.id}>
-                        <button onClick={() => onSelectTemplate(template)}>
+                    <ListGroup.Item key={template.id}>
+                        <Button
+                            variant="link"
+                            onClick={() => onSelectTemplate(template)}
+                        >
                             {template.name}
-                        </button>
-                    </li>
+                        </Button>
+                    </ListGroup.Item>
                 ))}
-            </ul>
-        </div>
+            </ListGroup>
+        </Container>
     );
 };
 
