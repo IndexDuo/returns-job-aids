@@ -3,6 +3,7 @@ import "./App.css";
 import EmailTemplate from "./components/EmailTemplate.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AgentInfo from "./components/AgentInfo.js";
+import EmailTemplateLists from "./components/EmailTemplateLists.js";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,6 +42,7 @@ function App() {
                 </div>
                 <div className="col-md-10">
                     <EmailTemplate />
+                    <EmailTemplateLists />
                 </div>
             </main>
             <footer style={{ marginTop: "-40px", textAlign: "right" }}>
