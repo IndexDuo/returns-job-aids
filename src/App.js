@@ -6,16 +6,11 @@ import AgentInfo from "./components/AgentInfo.js";
 import EmailTemplateLists from "./components/EmailTemplateLists.js";
 
 function App() {
-    const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    const handleSelectTemplate = (template) => {
-        setSelectedTemplate(template);
-    };
 
     useEffect(() => {
         const storedPassword = localStorage.getItem("password");
-        if (storedPassword && storedPassword === "C123") {
+        if (storedPassword && storedPassword === "123") {
             setIsAuthenticated(true);
         } else {
             checkPassword();
@@ -47,7 +42,7 @@ function App() {
                 </div>
                 <div className="col-md-10">
                     <EmailTemplate />
-                    <EmailTemplateLists />
+                    {/* <EmailTemplateLists /> */}
                 </div>
             </main>
             <footer style={{ marginTop: "-40px", textAlign: "right" }}>
