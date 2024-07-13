@@ -7,11 +7,9 @@ import AgentInfo from "./components/AgentInfo.js";
 function App() {
     return (
         <div className="container">
-            <header>
-                {/* <h1>Email Template Assistance</h1> */}
-            </header>
+            <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-md-1">
+                <div className="col-md-1 d-none d-md-block">
                     <AgentInfo />
                 </div>
                 <div className="col-md-15">
@@ -19,7 +17,7 @@ function App() {
                 </div>
             </main>
             <footer>
-                <p>&copy; 2024 Returns Assistance</p>
+                <p>&copy; 2024 Returns Assistance Project</p>
             </footer>
         </div>
     );
