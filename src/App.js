@@ -43,10 +43,10 @@ function App() {
                     <EmailTemplate />
                 </div>
             </main>
-            <footer style={{ marginTop: "-40px", textAlign:"right" }}>
+            <footer style={{ marginTop: "-40px", textAlign: "right" }}>
                 <p>
-                    &copy; 2024 Project By{" "}
-                    <a href="https://www.indexduo.me">JINGY</a>.
+                    &#128008; 2024 Project By{" "}
+                    <a href="https://www.indexduo.me">JING</a>.
                 </p>
             </footer>
         </div>
