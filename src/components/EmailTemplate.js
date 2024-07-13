@@ -12,6 +12,15 @@ const EmailTemplate = () => {
 
     const [copied, setCopied] = useState(false);
 
+    useEffect(() => {
+        const savedData = Cookies.get("agentInfo");
+        if (savedData) {
+            const agentInfo = JSON.parse(savedData);
+            if (agentInfo.firstName) {
+                setFormData({ ...formData, name: agentInfo.firstName });
+            }
+        }
+    }, []);
 
     const handleBlur = (field) => {
         let value = formData[field];
@@ -37,7 +46,7 @@ Dear [Customer],
 My name is ${formData.name}. I am contacting you regarding the return of the item with the tracking number ${formData.trackingNumber}. Please contact me at ${formData.phone} if you need any further information.
 
 Thank you,
-${formData.name}
+${formData.name.charAt(0)}${formData.name.length > 1 ? "." : ""}
   `;
 
     return (
@@ -94,7 +103,11 @@ ${formData.name}
                                 <p>
                                     Thank you,
                                     <br />
-                                    <span>{formData.name}</span>
+                                    <span>
+                                        {formData.name}{" "}
+                                        {formData.name &&
+                                            formData.name.charAt(0) + "."}
+                                    </span>
                                 </p>
                             </div>
                         </Form.Group>
