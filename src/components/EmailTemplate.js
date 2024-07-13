@@ -74,12 +74,14 @@ Thank you,
 ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLastName.length > 1 ? "." : ""}
   `;
 
-    const spanStyle = {
+    const inputStyle = {
+        border: "none",
         borderBottom: "1px dotted #007bff",
-        cursor: "text",
         backgroundColor: "#f8f9fa",
+        minWidth: "50px",
+        display: "inline-block",
         padding: "0 2px",
-        paddingRight: "70px",
+        outline: "none",
     };
 
     return (
@@ -94,50 +96,40 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                 <p>Dear [Customer],</p>
                                 <p>
                                     My name is{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) =>
+                                    <input
+                                        type="text"
+                                        value={formData.agentFirstName}
+                                        onChange={(e) =>
                                             handleInput(e, "agentFirstName")
                                         }
                                         onBlur={() =>
                                             handleBlur("agentFirstName")
                                         }
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.agentFirstName,
-                                        }}
-                                        className="text-primary"
-                                        style={spanStyle}
-                                    ></span>
+                                        style={inputStyle}
+                                    />
                                     . I am contacting you regarding the return
                                     of the item with the tracking number{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) =>
+                                    <input
+                                        type="text"
+                                        value={formData.trackingNumber}
+                                        onChange={(e) =>
                                             handleInput(e, "trackingNumber")
                                         }
                                         onBlur={() =>
                                             handleBlur("trackingNumber")
                                         }
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.trackingNumber,
-                                        }}
-                                        className="text-primary"
-                                        style={spanStyle}
-                                    ></span>
+                                        style={inputStyle}
+                                    />
                                     . Please contact me at{" "}
-                                    <span
-                                        contentEditable
-                                        suppressContentEditableWarning
-                                        onInput={(e) => handleInput(e, "phone")}
+                                    <input
+                                        type="text"
+                                        value={formData.phone}
+                                        onChange={(e) =>
+                                            handleInput(e, "phone")
+                                        }
                                         onBlur={() => handleBlur("phone")}
-                                        dangerouslySetInnerHTML={{
-                                            __html: formData.phone,
-                                        }}
-                                        className="text-primary wide-span"
-                                        style={spanStyle}
-                                    ></span>{" "}
+                                        style={inputStyle}
+                                    />{" "}
                                     if you need any further information.
                                 </p>
                                 <p>
