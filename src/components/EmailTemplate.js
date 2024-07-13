@@ -156,7 +156,7 @@ www.costco.com
         border: "none",
         borderBottom: "1px dotted #007bff",
         backgroundColor: "#f8f9fa",
-        minWidth: "70px",
+        minWidth: "50px",
         display: "inline-block",
         padding: "0 2px",
         outline: "none",
