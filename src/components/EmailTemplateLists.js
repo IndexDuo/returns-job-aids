@@ -12,6 +12,8 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
             );
     }, []);
 
+    console.log(templates);
+
     return (
         <div>
             <h4>Select an Email Template</h4>
