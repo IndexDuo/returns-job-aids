@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
@@ -13,6 +13,8 @@ const EmailTemplate = () => {
     });
 
     const [copied, setCopied] = useState(false);
+
+    const spanRef = useRef(null);
 
     const getAgentInfoFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
@@ -64,6 +66,19 @@ const EmailTemplate = () => {
         setTimeout(() => setCopied(false), 3000);
     };
 
+    const updateInputWidth = (input) => {
+        if (spanRef.current) {
+            spanRef.current.textContent = input.value;
+            const width = spanRef.current.offsetWidth;
+            input.style.width = `${width + 5}px`; // Add some padding for better look
+        }
+    };
+
+    useEffect(() => {
+        const inputs = document.querySelectorAll(".auto-width-input");
+        inputs.forEach((input) => updateInputWidth(input));
+    }, [formData]);
+
     const template = `
 Dear [Customer],
 
@@ -78,7 +93,6 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
         borderBottom: "1px dotted #007bff",
         backgroundColor: "#f8f9fa",
         minWidth: "70px",
-        width: "70px",
         display: "inline-block",
         padding: "0 2px",
         outline: "none",
@@ -106,6 +120,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                             handleBlur("agentFirstName")
                                         }
                                         style={inputStyle}
+                                        className="auto-width-input"
                                     />
                                     . I am contacting you regarding the return
                                     of the item with the tracking number{" "}
@@ -119,6 +134,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                             handleBlur("trackingNumber")
                                         }
                                         style={inputStyle}
+                                        className="auto-width-input"
                                     />
                                     . Please contact me at{" "}
                                     <input
@@ -129,6 +145,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                         }
                                         onBlur={() => handleBlur("phone")}
                                         style={inputStyle}
+                                        className="auto-width-input"
                                     />{" "}
                                     if you need any further information.
                                 </p>
@@ -169,6 +186,14 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                     </Form>
                 </Col>
             </Row>
+            <span
+                ref={spanRef}
+                style={{
+                    position: "absolute",
+                    visibility: "hidden",
+                    whiteSpace: "pre",
+                }}
+            ></span>
         </Container>
     );
 };
