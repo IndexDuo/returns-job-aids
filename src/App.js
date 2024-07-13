@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import EmailTemplate from "./components/EmailTemplate.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import EmailTemplate from "./components/EmailTemplate.js";
 import AgentInfo from "./components/AgentInfo.js";
 import EmailTemplateLists from "./components/EmailTemplateLists.js";
 
 function App() {
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const handleSelectTemplate = (template) => {
+        setSelectedTemplate(template);
+    };
 
     useEffect(() => {
         const storedPassword = localStorage.getItem("password");
-        if (storedPassword && storedPassword === "123") {
+        if (storedPassword && storedPassword === "C123") {
             setIsAuthenticated(true);
         } else {
             checkPassword();
