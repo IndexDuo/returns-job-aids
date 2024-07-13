@@ -21,7 +21,7 @@ const EmailTemplate = () => {
         agentLastName: "",
         phone: "",
         trackingNumber: "",
-        timeZone: "",
+        timeZone: "Eastern",
         firstContact: "",
         pickupDate: "",
     });
@@ -165,6 +165,25 @@ www.costco.com
                 <Col md={8} className="mx-auto">
                     <h2 className="mb-4">Email Template</h2>
                     <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Time Zone:</Form.Label>
+                            <Form.Control
+                                as="select"
+                                value={formData.timeZone}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        timeZone: e.target.value,
+                                    })
+                                }
+                            >
+                                {Object.keys(timeZoneMap).map((zone) => (
+                                    <option key={zone} value={zone}>
+                                        {zone}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Template:</Form.Label>
                             <div className="border p-3 rounded">
