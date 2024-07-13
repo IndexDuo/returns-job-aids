@@ -39,7 +39,7 @@ function App() {
                 <div className="col-md-1 d-none d-md-block">
                     {window.innerWidth >= 967 && <AgentInfo />}
                 </div>
-                <div className="col-md-15">
+                <div className="col-md-10">
                     <EmailTemplate />
                 </div>
             </main>

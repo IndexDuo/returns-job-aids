@@ -164,9 +164,9 @@ www.costco.com
 
     return (
         <Container className="mt-5">
-            <Row>
-                <Col md={8} className="mx-auto">
-                    <h2 className="mb-4" style={{ marginTop: "-40px" }}>
+            
+                
+                    <h2 className="mb-4" style={{ marginTop: "-40px"}}>
                         Email Template
                     </h2>
                     <Form>
@@ -422,8 +422,8 @@ www.costco.com
                         ref={spanRef}
                         style={{ visibility: "hidden", whiteSpace: "pre" }}
                     ></span>
-                </Col>
-            </Row>
+                
+            
         </Container>
     );
 };
