@@ -78,6 +78,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
         cursor: "text",
         backgroundColor: "#f8f9fa",
         padding: "0 2px",
+        minWidth: "500px",
     };
 
     return (
