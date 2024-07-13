@@ -21,7 +21,7 @@ const EmailTemplate = () => {
         agentLastName: "",
         phone: "",
         trackingNumber: "",
-        timeZone: "Eastern",
+        timeZone: "",
         firstContact: "",
         pickupDate: "",
     });
