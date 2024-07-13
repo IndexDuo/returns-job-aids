@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
+import emailTemplates from "../emailTemplates.json";
 
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
 
-    useEffect(() => {
-        fetch("../emailTemplates.json")
-            .then((response) => response.json())
-            .then((data) => setTemplates(data))
-            .catch((error) =>
-                console.error("Error fetching templates:", error)
-            );
-    }, []);
 
-    console.log(templates);
+
+    
 
     return (
         <div>
