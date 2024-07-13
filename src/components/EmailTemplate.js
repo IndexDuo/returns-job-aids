@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Cookies from "js-cookie";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import "../styles/EmailTemplate.css";
 
 const EmailTemplate = () => {
     const [formData, setFormData] = useState({
@@ -21,7 +20,7 @@ const EmailTemplate = () => {
             const agentInfo = JSON.parse(savedData);
             return {
                 firstName: agentInfo.firstName || "",
-                lastName: agentInfo.lastName || "",
+                lastName: agentInfo.lastName || ""
             };
         }
         return { firstName: "", lastName: "" };
@@ -32,7 +31,7 @@ const EmailTemplate = () => {
         setFormData((prevData) => ({
             ...prevData,
             agentFirstName: initialAgentInfo.firstName,
-            agentLastName: initialAgentInfo.lastName,
+            agentLastName: initialAgentInfo.lastName
         }));
 
         const intervalId = setInterval(() => {
@@ -40,7 +39,7 @@ const EmailTemplate = () => {
             setFormData((prevData) => ({
                 ...prevData,
                 agentFirstName: currentAgentInfo.firstName,
-                agentLastName: currentAgentInfo.lastName,
+                agentLastName: currentAgentInfo.lastName
             }));
         }, 1000);
 
@@ -53,11 +52,11 @@ const EmailTemplate = () => {
             value = value.replace(/\D/g, "");
             value = value.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
         }
-        setFormData({ [field]: value, ...formData });
+        setFormData({ ...formData, [field]: value });
     };
 
     const handleInput = (e, field) => {
-        setFormData({ [field]: e.target.innerText, ...formData });
+        setFormData({ ...formData, [field]: e.target.value });
     };
 
     const handleCopy = () => {
@@ -99,12 +98,8 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <input
                                         type="text"
                                         value={formData.agentFirstName}
-                                        onChange={(e) =>
-                                            handleInput(e, "agentFirstName")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("agentFirstName")
-                                        }
+                                        onChange={(e) => handleInput(e, "agentFirstName")}
+                                        onBlur={() => handleBlur("agentFirstName")}
                                         style={inputStyle}
                                     />
                                     . I am contacting you regarding the return
@@ -112,21 +107,15 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <input
                                         type="text"
                                         value={formData.trackingNumber}
-                                        onChange={(e) =>
-                                            handleInput(e, "trackingNumber")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("trackingNumber")
-                                        }
+                                        onChange={(e) => handleInput(e, "trackingNumber")}
+                                        onBlur={() => handleBlur("trackingNumber")}
                                         style={inputStyle}
                                     />
                                     . Please contact me at{" "}
                                     <input
                                         type="text"
                                         value={formData.phone}
-                                        onChange={(e) =>
-                                            handleInput(e, "phone")
-                                        }
+                                        onChange={(e) => handleInput(e, "phone")}
                                         onBlur={() => handleBlur("phone")}
                                         style={inputStyle}
                                     />{" "}
@@ -138,8 +127,7 @@ ${formData.agentFirstName} ${formData.agentLastName.charAt(0)}${formData.agentLa
                                     <span>
                                         {formData.agentFirstName}{" "}
                                         {formData.agentLastName &&
-                                            formData.agentLastName.charAt(0) +
-                                                "."}
+                                            formData.agentLastName.charAt(0) + "."}
                                     </span>
                                 </p>
                             </div>
