@@ -85,7 +85,7 @@ const EmailTemplate = () => {
 
     const updateInputWidth = (input) => {
         if (spanRef.current) {
-            spanRef.current.textContent = input.value;
+            spanRef.current.textContent = input.value || input.placeholder;
             const width = spanRef.current.offsetWidth;
             input.style.width = `${width - 5}px`; // remove padding for small font change
         }
