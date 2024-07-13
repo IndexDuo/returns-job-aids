@@ -8,16 +8,23 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        checkPassword();
+        const storedPassword = localStorage.getItem("password");
+        if (storedPassword && storedPassword === "123") {
+            setIsAuthenticated(true);
+        } else {
+            checkPassword();
+        }
     }, []);
 
     const checkPassword = () => {
         const password = prompt("Please enter the password:", "");
         if (password === "123") {
             setIsAuthenticated(true);
+            localStorage.setItem("password", password); // Store password if correct
         } else {
             alert("Incorrect password. Access denied.");
-            // Instead of calling checkPassword again, we'll let the user refresh to try again
+            // Optionally clear stored password if incorrect
+            localStorage.removeItem("password");
         }
     };
 
