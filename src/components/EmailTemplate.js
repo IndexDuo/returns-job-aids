@@ -164,266 +164,239 @@ www.costco.com
 
     return (
         <Container className="mt-5">
-            
-                
-                    <h2 className="mb-4" style={{ marginTop: "-40px"}}>
-                        Email Template
-                    </h2>
-                    <Form>
-                        <Form.Group className="mb3">
-                            <Form.Label>Time Zone:</Form.Label>
-                            <Form.Control
-                                as="select"
-                                value={formData.timeZone}
+            <h2
+                className="mb-4"
+                style={{
+                    marginTop: "-40px",
+                    fontSize: "20px",
+                    textAlign: "center",
+                }}
+            >
+                Email Template
+            </h2>
+            <Form style={{ marginTop: "-20px" }}>
+                <Form.Group className="mb3">
+                    <Form.Label>Time Zone:</Form.Label>
+                    <Form.Control
+                        as="select"
+                        value={formData.timeZone}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                timeZone: e.target.value,
+                            })
+                        }
+                    >
+                        {Object.keys(timeZoneMap).map((zone) => (
+                            <option key={zone} value={zone}>
+                                {zone}
+                            </option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Template:</Form.Label>
+                    <div
+                        className="border p-3 rounded"
+                        style={{
+                            // fontFamily: "Times New Roman",
+                            fontSize: "14px",
+                            lineHeight: "1.5",
+                        }}
+                    >
+                        <p>
+                            {getGreeting(formData.timeZone)}{" "}
+                            <input
+                                type="text"
+                                placeholder="<Member's Name>"
+                                value={formData.memberName}
+                                onChange={(e) => handleInput(e, "memberName")}
+                                onBlur={() => handleBlur("memberName")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                            ,
+                        </p>
+                        <p>
+                            My name is{" "}
+                            {formData.agentFirstName ? (
+                                <input
+                                    type="text"
+                                    value={formData.agentFirstName}
+                                    onChange={(e) =>
+                                        handleInput(e, "agentFirstName")
+                                    }
+                                    onBlur={() => handleBlur("agentFirstName")}
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
+                            ) : (
+                                <input
+                                    type="text"
+                                    placeholder="<First Name>"
+                                    onChange={(e) =>
+                                        handleInput(e, "agentFirstName")
+                                    }
+                                    onBlur={() => handleBlur("agentFirstName")}
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
+                            )}{" "}
+                            and I am part of the Costco Logistics Returns team.
+                            We attempted to reach you at Phone#{" "}
+                            <input
+                                type="text"
+                                placeholder="<Phone Number>"
+                                value={formData.phone}
+                                onChange={(e) => handleInput(e, "phone")}
+                                onBlur={() => handleBlur("phone")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />{" "}
+                            to schedule your return pickup. Please be advised
+                            that your pickup needs to be scheduled by{" "}
+                            <input
+                                type="text"
+                                placeholder="<10 business days from First Contact>"
+                                value={formData.pickupDate}
+                                onChange={(e) => handleInput(e, "pickupDate")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />{" "}
+                            to avoid cancellation of your return.
+                            <Button
+                                variant="link"
+                                onClick={handlePickupDateCalculation}
+                            >
+                                <FaCalendarAlt />
+                            </Button>
+                        </p>
+                        <p>You have three options to schedule the return:</p>
+                        <ol>
+                            <li>
+                                Contact us at 1-800-955-2292 to be assisted by
+                                one of our agents.
+                            </li>
+                            <li>
+                                Self-schedule using the link provided below.
+                            </li>
+                            <li>Return to your local warehouse.</li>
+                        </ol>
+                        <p>Your order information:</p>
+                        Order#:{" "}
+                        <input
+                            type="text"
+                            placeholder="<Order Number>"
+                            value={formData.orderNumber}
+                            onChange={(e) => handleInput(e, "orderNumber")}
+                            style={inputStyle}
+                            className="auto-width-input"
+                        />
+                        <br />
+                        Item#:{" "}
+                        <input
+                            type="text"
+                            placeholder="<Item Number>"
+                            value={formData.itemNumber}
+                            onChange={(e) => handleInput(e, "itemNumber")}
+                            style={inputStyle}
+                            className="auto-width-input"
+                        />
+                        <br />
+                        Item Description:{" "}
+                        <input
+                            type="text"
+                            placeholder="<Item Description>"
+                            value={formData.itemDescription}
+                            onChange={(e) => handleInput(e, "itemDescription")}
+                            style={inputStyle}
+                            className="auto-width-input"
+                        />
+                        <br />
+                        <br />
+                        <p>
+                            To self-schedule, please visit{" "}
+                            <a
+                                href="https://logistics.costco.com/userselfschedule"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                https://logistics.costco.com/userselfschedule
+                            </a>{" "}
+                            and enter your tracking number:{" "}
+                            <input
+                                type="text"
+                                placeholder="<Tracking Number>"
+                                value={formData.trackingNumber}
                                 onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        timeZone: e.target.value,
-                                    })
+                                    handleInput(e, "trackingNumber")
                                 }
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                        </p>
+                        <p>
+                            If you have decided to keep your item, please let us
+                            know by replying to this email or giving us a call.
+                            We would love to hear from you.
+                        </p>
+                        <p>
+                            We look forward to hearing from you soon. Have a
+                            wonderful day!
+                        </p>
+                        <p>
+                            <input
+                                type="text"
+                                placeholder="<First Name>"
+                                value={formData.agentFirstName}
+                                onChange={(e) =>
+                                    handleInput(e, "agentFirstName")
+                                }
+                                onBlur={() => handleBlur("agentFirstName")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />{" "}
+                            <input
+                                type="text"
+                                placeholder="<Last Initial>"
+                                value={formData.agentLastName.charAt(0)}
+                                onChange={(e) =>
+                                    handleInput(e, "agentLastName")
+                                }
+                                onBlur={() => handleBlur("agentLastName")}
+                                style={inputStyle}
+                                className="auto-width-input"
+                            />
+                            {formData.agentLastName.length > 1 ? "." : ""}
+                        </p>
+                        <p>
+                            Costco Logistics Returns Specialist
+                            <br />
+                            Costco Member Service Center | 1-800-955-2292
+                            <br />
+                            <a
+                                href="https://www.costco.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
-                                {Object.keys(timeZoneMap).map((zone) => (
-                                    <option key={zone} value={zone}>
-                                        {zone}
-                                    </option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Template:</Form.Label>
-                            <div
-                                className="border p-3 rounded"
-                                style={{
-                                    // fontFamily: "Times New Roman",
-                                    fontSize: "14px",
-                                    lineHeight: "1.5",
-                                }}
-                            >
-                                <p>
-                                    {getGreeting(formData.timeZone)}{" "}
-                                    <input
-                                        type="text"
-                                        placeholder="<Member's Name>"
-                                        value={formData.memberName}
-                                        onChange={(e) =>
-                                            handleInput(e, "memberName")
-                                        }
-                                        onBlur={() => handleBlur("memberName")}
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />
-                                    ,
-                                </p>
-                                <p>
-                                    My name is{" "}
-                                    {formData.agentFirstName ? (
-                                        <input
-                                            type="text"
-                                            value={formData.agentFirstName}
-                                            onChange={(e) =>
-                                                handleInput(e, "agentFirstName")
-                                            }
-                                            onBlur={() =>
-                                                handleBlur("agentFirstName")
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        />
-                                    ) : (
-                                        <input
-                                            type="text"
-                                            placeholder="<First Name>"
-                                            onChange={(e) =>
-                                                handleInput(e, "agentFirstName")
-                                            }
-                                            onBlur={() =>
-                                                handleBlur("agentFirstName")
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        />
-                                    )}{" "}
-                                    and I am part of the Costco Logistics
-                                    Returns team. We attempted to reach you at
-                                    Phone#{" "}
-                                    <input
-                                        type="text"
-                                        placeholder="<Phone Number>"
-                                        value={formData.phone}
-                                        onChange={(e) =>
-                                            handleInput(e, "phone")
-                                        }
-                                        onBlur={() => handleBlur("phone")}
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />{" "}
-                                    to schedule your return pickup. Please be
-                                    advised that your pickup needs to be
-                                    scheduled by{" "}
-                                    <input
-                                        type="text"
-                                        placeholder="<10 business days from First Contact>"
-                                        value={formData.pickupDate}
-                                        onChange={(e) =>
-                                            handleInput(e, "pickupDate")
-                                        }
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />{" "}
-                                    to avoid cancellation of your return.
-                                    <Button
-                                        variant="link"
-                                        onClick={handlePickupDateCalculation}
-                                    >
-                                        <FaCalendarAlt />
-                                    </Button>
-                                </p>
-                                <p>
-                                    You have three options to schedule the
-                                    return:
-                                </p>
-                                <ol>
-                                    <li>
-                                        Contact us at 1-800-955-2292 to be
-                                        assisted by one of our agents.
-                                    </li>
-                                    <li>
-                                        Self-schedule using the link provided
-                                        below.
-                                    </li>
-                                    <li>Return to your local warehouse.</li>
-                                </ol>
-                                <p>Your order information:</p>
-                                Order#:{" "}
-                                <input
-                                    type="text"
-                                    placeholder="<Order Number>"
-                                    value={formData.orderNumber}
-                                    onChange={(e) =>
-                                        handleInput(e, "orderNumber")
-                                    }
-                                    style={inputStyle}
-                                    className="auto-width-input"
-                                />
-                                <br />
-                                Item#:{" "}
-                                <input
-                                    type="text"
-                                    placeholder="<Item Number>"
-                                    value={formData.itemNumber}
-                                    onChange={(e) =>
-                                        handleInput(e, "itemNumber")
-                                    }
-                                    style={inputStyle}
-                                    className="auto-width-input"
-                                />
-                                <br />
-                                Item Description:{" "}
-                                <input
-                                    type="text"
-                                    placeholder="<Item Description>"
-                                    value={formData.itemDescription}
-                                    onChange={(e) =>
-                                        handleInput(e, "itemDescription")
-                                    }
-                                    style={inputStyle}
-                                    className="auto-width-input"
-                                />
-                                <br />
-                                <br />
-                                <p>
-                                    To self-schedule, please visit{" "}
-                                    <a
-                                        href="https://logistics.costco.com/userselfschedule"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        https://logistics.costco.com/userselfschedule
-                                    </a>{" "}
-                                    and enter your tracking number:{" "}
-                                    <input
-                                        type="text"
-                                        placeholder="<Tracking Number>"
-                                        value={formData.trackingNumber}
-                                        onChange={(e) =>
-                                            handleInput(e, "trackingNumber")
-                                        }
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />
-                                </p>
-                                <p>
-                                    If you have decided to keep your item,
-                                    please let us know by replying to this email
-                                    or giving us a call. We would love to hear
-                                    from you.
-                                </p>
-                                <p>
-                                    We look forward to hearing from you soon.
-                                    Have a wonderful day!
-                                </p>
-                                <p>
-                                    <input
-                                        type="text"
-                                        placeholder="<First Name>"
-                                        value={formData.agentFirstName}
-                                        onChange={(e) =>
-                                            handleInput(e, "agentFirstName")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("agentFirstName")
-                                        }
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />{" "}
-                                    <input
-                                        type="text"
-                                        placeholder="<Last Initial>"
-                                        value={formData.agentLastName.charAt(0)}
-                                        onChange={(e) =>
-                                            handleInput(e, "agentLastName")
-                                        }
-                                        onBlur={() =>
-                                            handleBlur("agentLastName")
-                                        }
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />
-                                    {formData.agentLastName.length > 1
-                                        ? "."
-                                        : ""}
-                                </p>
-                                <p>
-                                    Costco Logistics Returns Specialist
-                                    <br />
-                                    Costco Member Service Center |
-                                    1-800-955-2292
-                                    <br />
-                                    <a
-                                        href="https://www.costco.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        www.costco.com
-                                    </a>
-                                </p>
-                            </div>
-                        </Form.Group>
-                        <CopyToClipboard text={template} onCopy={handleCopy}>
-                            <Button variant="primary">Copy Template</Button>
-                        </CopyToClipboard>
-                        {copied && (
-                            <Alert variant="success" className="mt-3">
-                                Template copied to clipboard!
-                            </Alert>
-                        )}
-                    </Form>
-                    <span
-                        ref={spanRef}
-                        style={{ visibility: "hidden", whiteSpace: "pre" }}
-                    ></span>
-                
-            
+                                www.costco.com
+                            </a>
+                        </p>
+                    </div>
+                </Form.Group>
+                <CopyToClipboard text={template} onCopy={handleCopy}>
+                    <Button variant="primary">Copy Template</Button>
+                </CopyToClipboard>
+                {copied && (
+                    <Alert variant="success" className="mt-3">
+                        Template copied to clipboard!
+                    </Alert>
+                )}
+            </Form>
+            <span
+                ref={spanRef}
+                style={{ visibility: "hidden", whiteSpace: "pre" }}
+            ></span>
         </Container>
     );
 };
