@@ -201,6 +201,7 @@ www.costco.com
                                     {getGreeting(formData.timeZone)}{" "}
                                     <input
                                         type="text"
+                                        placeholder="<Member's Name>"
                                         value={formData.memberName}
                                         onChange={(e) =>
                                             handleInput(e, "memberName")
