@@ -1,9 +1,9 @@
 /* src/styles/AgentInfo.css */
 
-/* .agent-info-container {
-    position: absolute;
+.agent-info-container {
+    position: relative;
     top: 20px;
-    right: 20px;
+    right: -300px;
     width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -12,10 +12,10 @@
 }
 
 .custom-heading {
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 10px;
 }
 
 .custom-form-control {
-    font-size: 14px;
-} */
+    font-size: 12px;
+}

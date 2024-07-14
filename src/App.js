@@ -42,15 +42,7 @@ function App() {
         <div className="container">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-md-2 d-none d-md-block">
-                    {window.innerWidth >= 967 && <AgentInfo />}
-                    {window.innerWidth >= 967 && (
-                        <EmailTemplateLists
-                            onSelectTemplate={handleSelectTemplate}
-                        />
-                    )}
-                </div>
-                <div className="col-md-10">
+                <div className="col-md-8">
                     {window.innerWidth < 967 && (
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
@@ -58,6 +50,14 @@ function App() {
                     )}
                     {selectedTemplate && (
                         <EmailTemplate template={selectedTemplate} />
+                    )}
+                </div>
+                <div className="col-md-2 d-none d-md-block">
+                    {window.innerWidth >= 967 && <AgentInfo />}
+                    {window.innerWidth >= 967 && (
+                        <EmailTemplateLists
+                            onSelectTemplate={handleSelectTemplate}
+                        />
                     )}
                 </div>
             </main>
