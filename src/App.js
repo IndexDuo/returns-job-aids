@@ -42,7 +42,7 @@ function App() {
         <div className="container">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-md-8">
+                <div className="col-lg-10">
                     {window.innerWidth < 967 && (
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
@@ -52,7 +52,7 @@ function App() {
                         <EmailTemplate template={selectedTemplate} />
                     )}
                 </div>
-                <div className="col-md-2 d-none d-md-block">
+                <div className="col-lg-2 col-md-2 d-none d-md-block">
                     {window.innerWidth >= 967 && <AgentInfo />}
                     {window.innerWidth >= 967 && (
                         <EmailTemplateLists
