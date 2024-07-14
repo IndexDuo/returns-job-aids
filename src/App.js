@@ -9,10 +9,6 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
 
-    const handleSelectTemplate = (template) => {
-        setSelectedTemplate(template);
-    };
-
     useEffect(() => {
         const storedPassword = localStorage.getItem("password");
         if (storedPassword && storedPassword === "123") {
@@ -24,7 +20,7 @@ function App() {
 
     const checkPassword = () => {
         const password = prompt("Please enter the password:", "");
-        if (password === "123") {
+        if (password === "C123") {
             setIsAuthenticated(true);
             localStorage.setItem("password", password); // Store password if correct
         } else {
@@ -32,6 +28,9 @@ function App() {
             // Optionally clear stored password if incorrect
             localStorage.removeItem("password");
         }
+    };
+    const handleSelectTemplate = (template) => {
+        setSelectedTemplate(template);
     };
 
     if (!isAuthenticated) {
