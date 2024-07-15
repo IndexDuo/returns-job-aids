@@ -12,7 +12,7 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
     const fetchTemplates = async () => {
         const response = await fetch("/emailTemplates.json");
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setTemplates(data);
     };
     fetchTemplates();
