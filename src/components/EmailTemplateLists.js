@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-// import emailTemplates from "../../public/emailTemplates.json";
 import { Button, Container, ListGroup } from "react-bootstrap";
 import "../styles/templateList.css";
 
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
 
-    // useEffect(() => {
-    //     setTemplates(emailTemplates);
-    // }, []);
     const fetchTemplates = async () => {
-        const response = await fetch("/emailTemplates.json");
-        const data = await response.json();
-        setTemplates(data);
+        try {
+            const response = await fetch("/emailTemplates.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch templates");
+            }
+            const data = await response.json();
+            setTemplates(data);
+        } catch (error) {
+            console.error("Error fetching templates:", error);
+        }
     };
-    fetchTemplates();
+
+    useEffect(() => {
+        fetchTemplates();
+    }, []); // Empty dependency array ensures this runs only once
 
     return (
         <Container className="template-list-container">
