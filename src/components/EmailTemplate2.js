@@ -22,12 +22,17 @@ const EmailTemplate2 = () => {
     const spanRef = useRef(null);
 
     const fetchTemplates = async () => {
-        const response = await fetch("../emailTemplates.json");
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-        setTemplates(data);
-        setSelectedTemplate(data[0]); // Default to the first template
+        try {
+            const response = await fetch("/emailTemplates.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch templates");
+            }
+            const data = await response.json();
+            setTemplates(data);
+            setSelectedTemplate(data[0]); // Default to the first template
+        } catch (error) {
+            console.error("Error fetching templates:", error);
+        }
     };
 
     const getAgentInfoFromCookies = () => {
