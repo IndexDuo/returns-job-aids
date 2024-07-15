@@ -44,9 +44,13 @@ const EmailTemplate = (selectedTemplate) => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
-                setTemplate(data[0].template); // Set the first template as default
+                if (selectedTemplate === null) {
+                    setTemplate(data[0].template); // Set the first template as default
+                } else {
+                    setTemplate(templateContent);
+                }
             });
-    }, []);
+    }, [selectedTemplate]);
 
     const getAgentInfoFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
