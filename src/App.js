@@ -53,7 +53,7 @@ function App() {
                         />
                     )}
                     {selectedTemplate && (
-                        <EmailTemplate2 templatea={selectedTemplate} />
+                        <EmailTemplate2 selectedTemplate={selectedTemplate} />
                     )}
                 </div>
                 <div className="col-lg-2 col-md-2 d-none d-md-block">
