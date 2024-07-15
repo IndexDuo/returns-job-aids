@@ -30,7 +30,7 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
                     <ListGroup.Item key={template.id}>
                         <Button
                             variant="link"
-                            onClick={() => onSelectTemplate(template.template)}
+                            onClick={() => onSelectTemplate(template)}
                         >
                             {template.name}
                         </Button>
