@@ -28,7 +28,6 @@ const EmailTemplate2 = () => {
                 throw new Error("Failed to fetch templates");
             }
             const data = await response.json();
-            console.log(data);
             setTemplates(data);
             setSelectedTemplate(data[0]); // Default to the first template
         } catch (error) {

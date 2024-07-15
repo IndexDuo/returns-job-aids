@@ -20,7 +20,7 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
 
     useEffect(() => {
         fetchTemplates();
-    }, []); // Empty dependency array ensures this runs only once
+    }, []);
 
     return (
         <Container className="template-list-container">
