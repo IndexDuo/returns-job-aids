@@ -32,8 +32,9 @@ function App() {
         }
     };
     const handleSelectTemplate = (template) => {
-        setSelectedTemplate(JSON.stringify(template));
-        // console.log("selectedTemplate: " + JSON.stringify(template));
+        template = JSON.stringify(template);
+        setSelectedTemplate(template);
+        console.log(template);
     };
 
     if (!isAuthenticated) {
