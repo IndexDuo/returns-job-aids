@@ -38,7 +38,7 @@ function App() {
     }
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
                 <div className="col-lg-10">
