@@ -14,7 +14,7 @@ const timeZoneMap = {
     Atlantic: "America/Puerto_Rico",
 };
 
-const EmailTemplate = (selectedTemplate) => {
+const EmailTemplate = (templatea) => {
     const [formData, setFormData] = useState({
         memberName: "",
         agentFirstName: "",
@@ -33,7 +33,7 @@ const EmailTemplate = (selectedTemplate) => {
     const [copied, setCopied] = useState(false);
     const spanRef = useRef(null);
 
-    // console.log("selectedTemplate: " + selectedTemplate[0].name);
+    console.log("selectedTemplate: " + templatea[0]);
     useEffect(() => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
