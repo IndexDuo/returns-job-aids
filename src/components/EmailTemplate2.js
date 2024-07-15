@@ -162,6 +162,8 @@ www.costco.com
         outline: "none",
     };
 
+    console.log(selectedTemplate);
+
     return (
         <Container className="mt-5">
             <h2
