@@ -33,7 +33,13 @@ const EmailTemplate = (selectedTemplate) => {
     const [copied, setCopied] = useState(false);
     const spanRef = useRef(null);
 
-    console.log(typeof selectedTemplate.selectedTemplate);
+    // console.log(selectedTemplate);
+    // console.log(JSON.parse(selectedTemplate.selectedTemplate).name);
+    const templateName = JSON.parse(selectedTemplate.selectedTemplate).name;
+    const templateContent = JSON.parse(
+        selectedTemplate.selectedTemplate
+    ).template;
+
     useEffect(() => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
