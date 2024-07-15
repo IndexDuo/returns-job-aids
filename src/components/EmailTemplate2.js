@@ -37,7 +37,7 @@ const EmailTemplate = () => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
-                setTemplate(data.template1); // Or any other template you want to use
+                setTemplate(data[0].template); // Or any other template you want to use
             });
     }, []);
 
