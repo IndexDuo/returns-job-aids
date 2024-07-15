@@ -32,14 +32,14 @@ function App() {
         }
     };
     const handleSelectTemplate = (template) => {
-        setSelectedTemplate(template);
-        // console.log("selectedTemplate: " + template);
+        setSelectedTemplate(JSON.stringify(template));
+        // console.log("selectedTemplate: " + JSON.stringify(template));
     };
 
     if (!isAuthenticated) {
         return <div>Access denied. Please refresh the page to try again.</div>;
     }
-    console.log("selectedTemplate: " + selectedTemplate);
+    // console.log("selectedTemplate: " + selectedTemplate);
 
     return (
         <div className="container-fluid">
