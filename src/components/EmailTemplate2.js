@@ -22,8 +22,10 @@ const EmailTemplate2 = () => {
     const spanRef = useRef(null);
 
     const fetchTemplates = async () => {
-        const response = await fetch("/path-to-your-json-file");
+        const response = await fetch("../emailTemplates.json");
+        console.log(response);
         const data = await response.json();
+        console.log(data);
         setTemplates(data);
         setSelectedTemplate(data[0]); // Default to the first template
     };
