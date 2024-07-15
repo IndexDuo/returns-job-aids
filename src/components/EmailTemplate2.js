@@ -14,7 +14,7 @@ const timeZoneMap = {
     Atlantic: "America/Puerto_Rico",
 };
 
-const EmailTemplate = () => {
+const EmailTemplate = (selectedTemplate) => {
     const [formData, setFormData] = useState({
         memberName: "",
         agentFirstName: "",
