@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmailTemplate from "./components/EmailTemplate.js";
+import EmailTemplate2 from "./components/EmailTemplate2.js";
 import AgentInfo from "./components/AgentInfo.js";
 import EmailTemplateLists from "./components/EmailTemplateLists.js";
 import ReturnsGuide from "./components/ReturnsGuide.js";
@@ -52,7 +53,7 @@ function App() {
                         />
                     )}
                     {selectedTemplate && (
-                        <EmailTemplate template={selectedTemplate} />
+                        <EmailTemplate2 template={selectedTemplate} />
                     )}
                 </div>
                 <div className="col-lg-2 col-md-2 d-none d-md-block">
