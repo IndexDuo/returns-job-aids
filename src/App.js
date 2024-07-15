@@ -42,10 +42,7 @@ function App() {
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
                 <div className="col-lg-4 col-md-10">
-                    {window.innerWidth < 967 && <AgentInfo />}
-                    {selectedTemplate && (
-                        <EmailTemplate template={selectedTemplate} />
-                    )}
+                    <AgentInfo />
                 </div>
                 <div className="col-lg-6">
                     {window.innerWidth < 967 && (
