@@ -14,56 +14,59 @@ const timeZoneMap = {
     Atlantic: "America/Puerto_Rico",
 };
 
-const EmailTemplate2 = () => {
-    const [formData, setFormData] = useState({});
-    const [templates, setTemplates] = useState([]);
-    const [selectedTemplate, setSelectedTemplate] = useState({});
+const EmailTemplate = () => {
+    const [formData, setFormData] = useState({
+        memberName: "",
+        agentFirstName: "",
+        agentLastName: "",
+        phone: "",
+        trackingNumber: "",
+        orderNumber: "",
+        itemNumber: "",
+        itemDescription: "",
+        timeZone: "Eastern",
+        firstContact: "",
+        pickupDate: "",
+    });
+
+    const [template, setTemplate] = useState("");
     const [copied, setCopied] = useState(false);
     const spanRef = useRef(null);
 
-    const fetchTemplates = async () => {
-        try {
-            const response = await fetch("/emailTemplates.json");
-            if (!response.ok) {
-                throw new Error("Failed to fetch templates");
-            }
-            const data = await response.json();
-            setTemplates(data);
-            setSelectedTemplate(data[0]); // Default to the first template
-        } catch (error) {
-            console.error("Error fetching templates:", error);
-        }
-    };
+    useEffect(() => {
+        fetch("/path/to/templates.json")
+            .then((response) => response.json())
+            .then((data) => {
+                setTemplate(data.template1); // Or any other template you want to use
+            });
+    }, []);
 
     const getAgentInfoFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
         if (savedData) {
             const agentInfo = JSON.parse(savedData);
             return {
-                agentFirstName: agentInfo.firstName || "",
-                agentLastName: agentInfo.lastName || "",
+                firstName: agentInfo.firstName || "",
+                lastName: agentInfo.lastName || "",
             };
         }
-        return { agentFirstName: "", agentLastName: "" };
+        return { firstName: "", lastName: "" };
     };
 
     useEffect(() => {
-        fetchTemplates();
         const initialAgentInfo = getAgentInfoFromCookies();
         setFormData((prevData) => ({
             ...prevData,
-            agentFirstName: initialAgentInfo.agentFirstName,
-            agentLastName: initialAgentInfo.agentLastName,
-            timeZone: "Eastern",
-            pickupDate: "",
+            agentFirstName: initialAgentInfo.firstName,
+            agentLastName: initialAgentInfo.lastName,
         }));
 
         const intervalId = setInterval(() => {
             const currentAgentInfo = getAgentInfoFromCookies();
             setFormData((prevData) => ({
                 ...prevData,
-                agentFirstName: currentAgentInfo.agentFirstName,
-                agentLastName: currentAgentInfo.agentLastName,
+                agentFirstName: currentAgentInfo.firstName,
+                agentLastName: currentAgentInfo.lastName,
             }));
         }, 1000);
 
@@ -92,7 +95,7 @@ const EmailTemplate2 = () => {
         if (spanRef.current) {
             spanRef.current.textContent = input.value || input.placeholder;
             const width = spanRef.current.offsetWidth;
-            input.style.width = `${width - 5}px`; // remove padding for small font change
+            input.style.width = `${width - 5}px`;
         }
     };
 
@@ -128,37 +131,6 @@ const EmailTemplate2 = () => {
         setFormData({ ...formData, pickupDate: calculatedDate });
     };
 
-    const renderTemplate = () => {
-        if (!selectedTemplate.template) return "";
-
-        let template = selectedTemplate.template;
-        Object.keys(formData).forEach((key) => {
-            template = template.replace(
-                `{${key}}`,
-                formData[key] || `<${key}>`
-            );
-        });
-
-        return template;
-    };
-
-    const handleTemplateChange = (e) => {
-        const selected = templates.find(
-            (t) => t.id === parseInt(e.target.value)
-        );
-        setSelectedTemplate(selected);
-        const initialAgentInfo = getAgentInfoFromCookies();
-        const initialFormData = selected.inputs.reduce((acc, input) => {
-            acc[input] = initialAgentInfo[input] || "";
-            return acc;
-        }, {});
-        setFormData({
-            ...initialFormData,
-            timeZone: "Eastern",
-            pickupDate: "",
-        });
-    };
-
     const inputStyle = {
         border: "none",
         borderBottom: "1px dotted #007bff",
@@ -169,51 +141,67 @@ const EmailTemplate2 = () => {
         outline: "none",
     };
 
+    const renderTemplate = () => {
+        if (!template) return null;
+
+        return template.split("\n").map((line, index) => {
+            const parts = line.split(/(\{\{.+?\}\})/).filter(Boolean);
+
+            return (
+                <p key={index}>
+                    {parts.map((part, i) => {
+                        if (part.startsWith("{{") && part.endsWith("}}")) {
+                            const field = part.slice(2, -2).trim();
+                            return (
+                                <input
+                                    key={i}
+                                    type="text"
+                                    placeholder={`<${field}>`}
+                                    value={formData[field]}
+                                    onChange={(e) => handleInput(e, field)}
+                                    onBlur={() => handleBlur(field)}
+                                    style={inputStyle}
+                                    className="auto-width-input"
+                                />
+                            );
+                        } else {
+                            return part;
+                        }
+                    })}
+                </p>
+            );
+        });
+    };
+
+    const compiledTemplate = template.replace(
+        /\{\{(.+?)\}\}/g,
+        (_, field) => formData[field.trim()] || `<${field.trim()}>`
+    );
+
     return (
         <Container className="mt-5">
-            <h2 className="mb-4" style={{ marginTop: "15px" }}>
-                Email Template Filler
+            <h2
+                className="mb-4"
+                style={{
+                    marginTop: "-40px",
+                    fontSize: "20px",
+                    textAlign: "center",
+                }}
+            >
+                Email Template
             </h2>
-            <Form>
-                <Form.Group controlId="templateSelect">
-                    <Form.Label>Select Template</Form.Label>
-                    <Form.Control
-                        as="select"
-                        onChange={handleTemplateChange}
-                        value={selectedTemplate.id || ""}
-                    >
-                        {templates.map((template) => (
-                            <option key={template.id} value={template.id}>
-                                {template.name}
-                            </option>
-                        ))}
-                    </Form.Control>
-                </Form.Group>
-
-                {selectedTemplate.inputs &&
-                    selectedTemplate.inputs.map((input) => (
-                        <Form.Group key={input}>
-                            <Form.Label>
-                                {input.replace(/([A-Z])/g, " $1")}
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={formData[input] || ""}
-                                onChange={(e) => handleInput(e, input)}
-                                onBlur={() => handleBlur(input)}
-                                placeholder={`<${input}>`}
-                                className="auto-width-input"
-                                style={inputStyle}
-                            />
-                        </Form.Group>
-                    ))}
-
-                <Form.Group>
-                    <Form.Label>Time Zone</Form.Label>
+            <Form style={{ marginTop: "-20px" }}>
+                <Form.Group className="mb3">
+                    <Form.Label>Time Zone:</Form.Label>
                     <Form.Control
                         as="select"
                         value={formData.timeZone}
-                        onChange={(e) => handleInput(e, "timeZone")}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                timeZone: e.target.value,
+                            })
+                        }
                     >
                         {Object.keys(timeZoneMap).map((zone) => (
                             <option key={zone} value={zone}>
@@ -222,62 +210,53 @@ const EmailTemplate2 = () => {
                         ))}
                     </Form.Control>
                 </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>Pickup Date</Form.Label>
-                    <Button
-                        variant="outline-secondary"
-                        onClick={handlePickupDateCalculation}
-                        className="d-block mb-2"
+                <Form.Group className="mb-3">
+                    <Form.Label>Template:</Form.Label>
+                    <div
+                        className="border p-3 rounded"
+                        style={{
+                            fontSize: "14px",
+                            lineHeight: "1.5",
+                        }}
                     >
-                        <FaCalendarAlt /> Calculate Pickup Date
-                    </Button>
-                    <Form.Control
-                        type="text"
-                        value={formData.pickupDate}
-                        readOnly
-                        placeholder="<pickupDate>"
-                        className="auto-width-input"
-                        style={inputStyle}
-                    />
+                        {renderTemplate()}
+                    </div>
                 </Form.Group>
-
-                <CopyToClipboard text={renderTemplate()} onCopy={handleCopy}>
-                    <Button variant="primary" className="mt-3">
+                <CopyToClipboard text={compiledTemplate} onCopy={handleCopy}>
+                    <Button
+                        style={{
+                            backgroundColor: "#007bff",
+                            color: "white",
+                            border: "none",
+                        }}
+                        className="mt-3"
+                    >
                         Copy to Clipboard
                     </Button>
                 </CopyToClipboard>
                 {copied && (
-                    <Alert variant="success" className="mt-3">
-                        Email template copied to clipboard!
+                    <Alert
+                        variant="success"
+                        className="mt-3"
+                        onClose={() => setCopied(false)}
+                        dismissible
+                    >
+                        Template copied to clipboard!
                     </Alert>
                 )}
             </Form>
-
-            <div style={{ marginTop: "20px" }}>
-                <h4>Generated Email:</h4>
-                <div
-                    style={{
-                        whiteSpace: "pre-wrap",
-                        backgroundColor: "#f8f9fa",
-                        padding: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #dee2e6",
-                    }}
-                >
-                    {renderTemplate()}
-                </div>
-                <span
-                    ref={spanRef}
-                    style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        whiteSpace: "pre",
-                    }}
-                ></span>
-            </div>
+            <span
+                ref={spanRef}
+                style={{
+                    position: "absolute",
+                    top: "-9999px",
+                    left: "-9999px",
+                    visibility: "hidden",
+                    whiteSpace: "nowrap",
+                }}
+            ></span>
         </Container>
     );
 };
 
-export default EmailTemplate2;
+export default EmailTemplate;
