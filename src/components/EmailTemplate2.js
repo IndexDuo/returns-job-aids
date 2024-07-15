@@ -37,7 +37,7 @@ const EmailTemplate = () => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
-                setTemplate(data[0].template); // Or any other template you want to use
+                setTemplate(data[0].template); // Set the first template as default
             });
     }, []);
 
@@ -173,7 +173,7 @@ const EmailTemplate = () => {
         });
     };
 
-    console.log("template: " + template); //undefined
+    //console.log("template: " + template); //undefined
     const compiledTemplate = template.replace(
         /\{\{(.+?)\}\}/g,
         (_, field) => formData[field.trim()] || `<${field.trim()}>`
