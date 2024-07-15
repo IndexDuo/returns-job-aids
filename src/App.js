@@ -41,7 +41,13 @@ function App() {
         <div className="container-fluid">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-lg-10">
+                <div className="col-lg-4 col-md-10">
+                    {window.innerWidth < 967 && <AgentInfo />}
+                    {selectedTemplate && (
+                        <EmailTemplate template={selectedTemplate} />
+                    )}
+                </div>
+                <div className="col-lg-6">
                     {window.innerWidth < 967 && (
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
@@ -60,12 +66,13 @@ function App() {
                     )}
                 </div>
             </main>
-            <footer style={{ marginTop: "-40px", textAlign: "right" }}>
+
+            {/* <footer style={{ marginTop: "-40px", textAlign: "right" }}>
                 <p>
                     &#128008; 2024 Project By{" "}
                     <a href="https://www.indexduo.me">JING</a>.
                 </p>
-            </footer>
+            </footer> */}
         </div>
     );
 }
