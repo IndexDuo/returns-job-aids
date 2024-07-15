@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EmailTemplate from "./components/EmailTemplate.js";
 import AgentInfo from "./components/AgentInfo.js";
 import EmailTemplateLists from "./components/EmailTemplateLists.js";
+import ReturnsGuide from "./components/ReturnsGuide.js";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -42,7 +43,7 @@ function App() {
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
                 <div className="col-lg-4 col-md-10">
-                    <AgentInfo />
+                    <ReturnsGuide />
                 </div>
                 <div className="col-lg-6">
                     {window.innerWidth < 967 && (
