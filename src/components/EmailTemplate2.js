@@ -173,6 +173,7 @@ const EmailTemplate = () => {
         });
     };
 
+    console.log("template: " + template); //undefined
     const compiledTemplate = template.replace(
         /\{\{(.+?)\}\}/g,
         (_, field) => formData[field.trim()] || `<${field.trim()}>`
