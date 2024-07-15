@@ -33,7 +33,7 @@ function App() {
     };
     const handleSelectTemplate = (template) => {
         setSelectedTemplate(template);
-        console.log("selectedTemplate: " + template);
+        // console.log("selectedTemplate: " + template);
     };
 
     if (!isAuthenticated) {
