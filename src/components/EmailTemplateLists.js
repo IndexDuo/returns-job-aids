@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import emailTemplates from "../emailTemplates.json";
+// import emailTemplates from "../../public/emailTemplates.json";
 import { Button, Container, ListGroup } from "react-bootstrap";
 import "../styles/templateList.css";
 
 const EmailTemplateLists = ({ onSelectTemplate }) => {
     const [templates, setTemplates] = useState([]);
 
-    useEffect(() => {
-        setTemplates(emailTemplates);
-    }, []);
+    // useEffect(() => {
+    //     setTemplates(emailTemplates);
+    // }, []);
+    const fetchTemplates = async () => {
+        const response = await fetch("/emailTemplates.json");
+        const data = await response.json();
+        console.log(data);
+        setTemplates(data);
+    };
+    fetchTemplates();
 
     return (
         <Container className="template-list-container">
