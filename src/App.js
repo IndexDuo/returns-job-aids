@@ -38,6 +38,7 @@ function App() {
     if (!isAuthenticated) {
         return <div>Access denied. Please refresh the page to try again.</div>;
     }
+    console.log("selectedTemplate: " + selectedTemplate);
 
     return (
         <div className="container-fluid">
