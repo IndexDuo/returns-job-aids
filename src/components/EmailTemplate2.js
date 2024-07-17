@@ -78,7 +78,7 @@ const EmailTemplate = (selectedTemplate) => {
             setFormData((prevData) => ({
                 ...prevData,
                 agentFirstName: currentAgentInfo.firstName,
-                agentLastName: currentAgentInfo.lastName,
+                agentLastInitial: currentAgentInfo.lastName,
             }));
         }, 1000);
 
