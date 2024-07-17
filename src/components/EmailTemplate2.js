@@ -177,6 +177,7 @@ const EmailTemplate = (selectedTemplate) => {
                                     </span>
                                 );
                             } else {
+                                // filter the placeholders so when the value is <memberName>, the placeholder should be <Member's Name>. <agentFirstName> will be <First Name>. <phone> will be <Phone Number>. <trackingNumber> will be <Tracking Number>. <orderNumber> will be <Order Number>. <itemNumber> will be <Item Number>. <itemDescription> will be <Item Description>. <timeZone> will be <Time Zone>. <firstContact> will be <First Contact>. <pickupDate> will be <Pickup Date>.
                                 return (
                                     <input
                                         key={i}
