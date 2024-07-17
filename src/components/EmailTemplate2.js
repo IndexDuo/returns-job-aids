@@ -75,6 +75,7 @@ const EmailTemplate = (selectedTemplate) => {
 
         const intervalId = setInterval(() => {
             const currentAgentInfo = getAgentInfoFromCookies();
+            
             setFormData((prevData) => ({
                 ...prevData,
                 agentFirstName: currentAgentInfo.firstName,
