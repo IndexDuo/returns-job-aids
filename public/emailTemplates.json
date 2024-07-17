@@ -5,39 +5,39 @@
         "template": "{{greeting}} {{memberName}},\n\nMy name is {{agentFirstName}} and I am part of the Costco Logistics Returns team. We attempted to reach you at Phone# {{phone}} to schedule your return pickup. Please be advised that your pickup needs to be scheduled by {{pickupDate}} to avoid cancellation of your return.\n\nYou have three options to schedule the return:\n1. Contact us at 1-800-955-2292 to be assisted by one of our agents.\n2. Self-schedule using the link provided below.\n3. Return to your local warehouse.\n\nYour order information:\nOrder#: {{orderNumber}}\nItem#: {{itemNumber}}\nItem Description: {{itemDescription}}\n\nTo self-schedule, please visit https://logistics.costco.com/userselfschedule and enter your tracking number: {{trackingNumber}}\n\nIf you have decided to keep your item, please let us know by replying to this email or giving us a call. We would love to hear from you.\n\nWe look forward to hearing from you soon. Have a wonderful day!\n\n{{agentFirstName}} {{agentLastInitial}}.\nCostco Logistics Returns Specialist\nCostco Member Service Center | 1-800-955-2292\nwww.costco.com",
         "inputs": [
             {
-                "value": "memberName",
+                "name": "memberName",
                 "placeholder": "Member's Name"
             },
             {
-                "value": "agentFirstName",
+                "name": "agentFirstName",
                 "placeholder": "First Name"
             },
             {
-                "value": "agentLastInitial",
+                "name": "agentLastInitial",
                 "placeholder": "Last Initial"
             },
             {
-                "value": "phone",
+                "name": "phone",
                 "placeholder": "Phone Number"
             },
             {
-                "value": "trackingNumber",
+                "name": "trackingNumber",
                 "placeholder": "Tracking Number"
             },
             {
-                "value": "orderNumber",
+                "name": "orderNumber",
                 "placeholder": "Order Number"
             },
             {
-                "value": "itemNumber",
+                "name": "itemNumber",
                 "placeholder": "Item Number"
             },
             {
-                "value": "itemDescription",
+                "name": "itemDescription",
                 "placeholder": "Item Description"
             },
             {
-                "value": "pickupDate",
+                "name": "pickupDate",
                 "placeholder": "Pickup Date"
             }
         ]
@@ -47,16 +47,46 @@
         "name": "Rescheduling Pick Up",
         "template": "{{greeting}} {{memberName}},\n\nMy name is {{agentFirstName}} and I am part of the Costco Logistics Returns team. It seems like we missed your scheduled pickup on {{oldDate}}. We attempted to reach you at Phone# {{phone}} to schedule your return pickup. Please be advised that your pickup needs to be scheduled by {{pickupDate}} to avoid cancellation of your return.\n\nYou have three options to schedule the return:\n1. Contact us at 1-800-955-2292 to be assisted by one of our agents.\n2. Self-schedule using the link provided below.\n3. Return to your local warehouse.\n\nYour order information:\nOrder#: {{orderNumber}}\nItem#: {{itemNumber}}\nItem Description: {{itemDescription}}\n\nTo self-schedule, please visit https://logistics.costco.com/userselfschedule and enter your tracking number: {{trackingNumber}}\n\nIf you have decided to keep your item, please let us know by replying to this email or giving us a call. We would love to hear from you.\n\nWe look forward to hearing from you soon. Have a wonderful day!\n\n{{agentFirstName}} {{agentLastInitial}}.\nCostco Logistics Returns Specialist\nCostco Member Service Center | 1-800-955-2292\nwww.costco.com",
         "inputs": [
-            "memberName",
-            "agentFirstName",
-            "agentLastInitial",
-            "phone",
-            "trackingNumber",
-            "orderNumber",
-            "itemNumber",
-            "itemDescription",
-            "oldDate",
-            "pickupDate"
+            {
+                "name": "memberName",
+                "placeholder": "Member's Name"
+            },
+            {
+                "name": "agentFirstName",
+                "placeholder": "First Name"
+            },
+            {
+                "name": "agentLastInitial",
+                "placeholder": "Last Initial"
+            },
+            {
+                "name": "phone",
+                "placeholder": "Phone Number"
+            },
+            {
+                "name": "trackingNumber",
+                "placeholder": "Tracking Number"
+            },
+            {
+                "name": "orderNumber",
+                "placeholder": "Order Number"
+            },
+            {
+                "name": "itemNumber",
+                "placeholder": "Item Number"
+            },
+            {
+                "name": "itemDescription",
+                "placeholder": "Item Description"
+            },
+            {
+                "name": "oldDate",
+                "placeholder": "Old Date"
+            },
+            {
+                "name": "pickupDate",
+                "placeholder": "Pickup Date"
+            }
         ]
     }
 ]
