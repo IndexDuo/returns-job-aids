@@ -170,18 +170,26 @@ const EmailTemplate = (selectedTemplate) => {
                     {parts.map((part, i) => {
                         if (part.startsWith("{{") && part.endsWith("}}")) {
                             const field = part.slice(2, -2).trim();
-                            return (
-                                <input
-                                    key={i}
-                                    type="text"
-                                    placeholder={`<${field}>`}
-                                    value={formData[field]}
-                                    onChange={(e) => handleInput(e, field)}
-                                    onBlur={() => handleBlur(field)}
-                                    style={inputStyle}
-                                    className="auto-width-input"
-                                />
-                            );
+                            if (field === "greeting") {
+                                return (
+                                    <span key={i}>
+                                        {getGreeting(formData.timeZone)}{" "}
+                                    </span>
+                                );
+                            } else {
+                                return (
+                                    <input
+                                        key={i}
+                                        type="text"
+                                        placeholder={`<${field}>`}
+                                        value={formData[field]}
+                                        onChange={(e) => handleInput(e, field)}
+                                        onBlur={() => handleBlur(field)}
+                                        style={inputStyle}
+                                        className="auto-width-input"
+                                    />
+                                );
+                            }
                         } else {
                             return part;
                         }
