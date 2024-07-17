@@ -16,6 +16,7 @@ const timeZoneMap = {
 
 const EmailTemplate = (selectedTemplate) => {
     const [formData, setFormData] = useState({
+        greeting: "",
         memberName: "",
         agentFirstName: "",
         agentLastName: "",
@@ -168,7 +169,7 @@ const EmailTemplate = (selectedTemplate) => {
                                     key={i}
                                     type="text"
                                     placeholder={`<${field}>`}
-                                    
+
                                     value={formData[field]}
                                     onChange={(e) => handleInput(e, field)}
                                     onBlur={() => handleBlur(field)}
