@@ -46,6 +46,7 @@ const EmailTemplate = (selectedTemplate) => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 if (!selectedTemplate) {
                     let templateContent = JSON.parse(data[0].template);
                     setTemplate(data[0].template); // Set the first template as default
@@ -55,6 +56,12 @@ const EmailTemplate = (selectedTemplate) => {
                     // console.log("templateContent: " + templateContent);
                 }
             });
+    },[]);
+
+    useEffect(() => {
+        if (selectedTemplate) {
+            setTemplate(templateContent);
+        }
     }, [selectedTemplate]);
 
     const getAgentInfoFromCookies = () => {
