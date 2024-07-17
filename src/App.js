@@ -34,7 +34,7 @@ function App() {
     const handleSelectTemplate = (template) => {
         template = JSON.stringify(template);
         setSelectedTemplate(template);
-        console.log(template);
+        // console.log(template);
     };
 
     if (!isAuthenticated) {

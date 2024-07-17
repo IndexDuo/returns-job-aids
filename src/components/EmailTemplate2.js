@@ -40,15 +40,17 @@ const EmailTemplate = (selectedTemplate) => {
     const templateContent = JSON.parse(
         selectedTemplate.selectedTemplate
     ).template;
+    const templateInputs = JSON.parse(selectedTemplate.selectedTemplate).inputs;
 
     useEffect(() => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
-                if (selectedTemplate === null) {
+                if (selectedTemplate == null) {
                     setTemplate(data[0].template); // Set the first template as default
                 } else {
                     setTemplate(templateContent);
+                    // console.log("templateContent: " + templateContent);
                 }
             });
     }, [selectedTemplate]);
