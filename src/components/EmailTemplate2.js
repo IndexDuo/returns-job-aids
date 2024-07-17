@@ -75,12 +75,17 @@ const EmailTemplate = (selectedTemplate) => {
 
         const intervalId = setInterval(() => {
             const currentAgentInfo = getAgentInfoFromCookies();
-            
             setFormData((prevData) => ({
                 ...prevData,
                 agentFirstName: currentAgentInfo.firstName,
-                agentLastInitial: currentAgentInfo.lastName,
             }));
+            if (currentAgentInfo.lastName) {
+                const lastInitial = currentAgentInfo.lastName.charAt(0);
+                setFormData((prevData) => ({
+                    ...prevData,
+                    agentLastInitial: lastInitial,
+                }));
+            }
         }, 1000);
 
         return () => clearInterval(intervalId);
