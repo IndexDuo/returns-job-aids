@@ -37,6 +37,16 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
                         </Button>
                     </ListGroup.Item>
                 ))}
+                {!templates.some(template => template.id === 1) && (
+                    <ListGroup.Item>
+                        <Button
+                            variant="link"
+                            onClick={() => onSelectTemplate(templates.find(template => template.id === 1))}
+                        >
+                            Default Template
+                        </Button>
+                    </ListGroup.Item>
+                )}
             </ListGroup>
         </Container>
     );
