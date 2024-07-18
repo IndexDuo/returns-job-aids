@@ -47,16 +47,16 @@ const EmailTemplate = (selectedTemplate) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                if (!selectedTemplate) {
+                if (selectedTemplate) {
                     let templateContent = JSON.parse(data[0].template);
-                    setTemplate(data[0].template); // Set the first template as default
+                    //setTemplate(data[0].template); // Set the first template as default
                     console.log("templateContent: " + templateContent);
                 } else {
                     setTemplate(templateContent);
                     // console.log("templateContent: " + templateContent);
                 }
             });
-    },[]);
+    }, []);
 
     useEffect(() => {
         if (selectedTemplate) {
