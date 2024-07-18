@@ -46,13 +46,14 @@ const EmailTemplate = (selectedTemplate) => {
         fetch("/emailTemplates.json")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-                if (selectedTemplate) {
-                    let templateContent = JSON.parse(data[0].template);
+                console.log(data[0]);
+                if (true) {
+                    let templateContent2 = data[0].template;
                     //setTemplate(data[0].template); // Set the first template as default
-                    console.log("templateContent: " + templateContent);
+                    console.log("templateContent: " + templateContent2);
+                    setTemplate(templateContent2);
                 } else {
-                    setTemplate(templateContent);
+                    //setTemplate(templateContent);
                     // console.log("templateContent: " + templateContent);
                 }
             });
