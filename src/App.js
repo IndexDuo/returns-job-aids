@@ -56,10 +56,11 @@ function App() {
                 </div>
                 <div className="col-lg-2 col-md-2 d-none d-md-block">
                     <AgentInfo />
-
-                    <EmailTemplateLists
-                        onSelectTemplate={handleSelectTemplate}
-                    />
+                    <div className="ml-6 p-6">
+                        <EmailTemplateLists
+                            onSelectTemplate={handleSelectTemplate}
+                        />
+                    </div>
                 </div>
             </main>
 
