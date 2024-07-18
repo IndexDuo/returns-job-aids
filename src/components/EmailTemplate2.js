@@ -34,7 +34,6 @@ const EmailTemplate = (selectedTemplate) => {
     const [copied, setCopied] = useState(false);
     const spanRef = useRef(null);
 
-    // console.log(selectedTemplate);
     // console.log(JSON.parse(selectedTemplate.selectedTemplate).name);
     const templateName = JSON.parse(selectedTemplate.selectedTemplate).name;
     const templateContent = JSON.parse(
