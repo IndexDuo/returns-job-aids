@@ -46,28 +46,47 @@ function App() {
         <div className="container-fluid">
             <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-lg-4 col-md-10">
+                <div className="col-lg-3 col-md-10">
                     <ReturnsGuide selectedTemplate={selectedTemplate} />
                 </div>
-                <div className="col-lg-6">
-                    {window.innerWidth < 967 && (
-                        <EmailTemplateLists
-                            onSelectTemplate={handleSelectTemplate}
-                        />
-                    )}
+                <div className="col-lg-7">
                     {selectedTemplate && (
                         <EmailTemplate2 selectedTemplate={selectedTemplate} />
                     )}
                 </div>
                 <div className="col-lg-2 col-md-2 d-none d-md-block">
-                    {window.innerWidth >= 967 && <AgentInfo />}
-                    {window.innerWidth >= 967 && (
-                        <EmailTemplateLists
-                            onSelectTemplate={handleSelectTemplate}
-                        />
-                    )}
+                    <AgentInfo />
+
+                    <EmailTemplateLists
+                        onSelectTemplate={handleSelectTemplate}
+                    />
                 </div>
             </main>
+
+            {/* <main>
+                <div className="row">
+                    <div className="col-lg-3 col-md-10">
+                        <ReturnsGuide selectedTemplate={selectedTemplate} />
+                    </div>
+                    <div className="col-lg-7">
+                        {selectedTemplate && (
+                            <EmailTemplate2
+                                selectedTemplate={selectedTemplate}
+                            />
+                        )}
+                    </div>
+                    <div className="col-lg-2 col-md-2 d-none d-md-block">
+                        <AgentInfo />
+                    </div>
+                    <div className="row align-items-end">
+                        <div className="col-lg-2 align-self-end">
+                            <EmailTemplateLists
+                                onSelectTemplate={handleSelectTemplate}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </main> */}
 
             {/* <footer style={{ marginTop: "-40px", textAlign: "right" }}>
                 <p>

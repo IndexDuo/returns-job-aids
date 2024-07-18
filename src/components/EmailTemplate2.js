@@ -124,6 +124,28 @@ const EmailTemplate = (selectedTemplate) => {
         if (field === "phone") {
             value = value.replace(/\D/g, "");
             value = value.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+        } else if (field === "pickupDate") {
+            const dateParts = formData.pickupDate.split("/");
+            const month = new Date(
+                dateParts[2],
+                dateParts[0] - 1,
+                dateParts[1]
+            ).toLocaleString("en-US", { month: "long" });
+            const day = new Date(
+                dateParts[2],
+                dateParts[0] - 1,
+                dateParts[1]
+            ).toLocaleString("en-US", { day: "numeric" });
+            const weekday = new Date(
+                dateParts[2],
+                dateParts[0] - 1,
+                dateParts[1]
+            ).toLocaleString("en-US", { weekday: "long" });
+            if ((month || day || weekday) === "Invalid Date") {
+                value = "";
+            } else {
+                value = `${weekday}, ${month} ${day}, ${dateParts[2]}`;
+            }
         }
         setFormData({ ...formData, [field]: value });
     };
@@ -214,6 +236,9 @@ const EmailTemplate = (selectedTemplate) => {
                                             value={formData.pickupDate}
                                             onChange={(e) =>
                                                 handleInput(e, "pickupDate")
+                                            }
+                                            onBlur={() =>
+                                                handleBlur("pickupDate")
                                             }
                                             style={inputStyle}
                                             className="auto-width-input"
