@@ -20,7 +20,8 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
 
     useEffect(() => {
         fetchTemplates();
-        // console.log(templates[1].template);
+        // onSelectTemplate(templates[0]);
+        console.log(templates);
     }, []);
 
     return (
@@ -37,16 +38,6 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
                         </Button>
                     </ListGroup.Item>
                 ))}
-                {!templates.some(template => template.id === 1) && (
-                    <ListGroup.Item>
-                        <Button
-                            variant="link"
-                            onClick={() => onSelectTemplate(templates.find(template => template.id === 1))}
-                        >
-                            Default Template
-                        </Button>
-                    </ListGroup.Item>
-                )}
             </ListGroup>
         </Container>
     );

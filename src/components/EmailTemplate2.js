@@ -49,7 +49,7 @@ const EmailTemplate = (selectedTemplate) => {
                 if (true) {
                     let templateContent2 = data[0].template;
                     //setTemplate(data[0].template); // Set the first template as default
-                    console.log("templateContent: " + templateContent2);
+                    //console.log("templateContent: " + templateContent2);
                     setTemplate(templateContent2);
                 } else {
                     //setTemplate(templateContent);
