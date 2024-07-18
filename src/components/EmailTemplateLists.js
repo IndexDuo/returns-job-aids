@@ -20,8 +20,8 @@ const EmailTemplateLists = ({ onSelectTemplate }) => {
 
     useEffect(() => {
         fetchTemplates();
-        // onSelectTemplate(templates[0]);
-        console.log(templates);
+        onSelectTemplate(templates[0]);
+        console.log(templates[0]);
     }, []);
 
     return (
