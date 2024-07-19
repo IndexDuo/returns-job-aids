@@ -218,77 +218,141 @@ const EmailTemplate = (selectedTemplate) => {
     const renderTemplate = () => {
         if (!template) return null;
 
-        return template.split("\n").map((line, index) => {
-            const parts = line.split(/(\{\{.+?\}\})/).filter(Boolean);
+        // Replace double newline with a unique placeholder
+        const doubleNewlinePlaceholder = "___DOUBLE_NEWLINE___";
+        const singleNewlinePlaceholder = "___SINGLE_NEWLINE___";
 
-            return (
-                <p key={index}>
-                    {parts.map((part, i) => {
-                        if (part.startsWith("{{") && part.endsWith("}}")) {
-                            const field = part.slice(2, -2).trim();
-                            if (field === "greeting") {
+        let processedTemplate = template.replace(
+            /\n\n/g,
+            doubleNewlinePlaceholder
+        );
+        processedTemplate = processedTemplate.replace(
+            /\n/g,
+            singleNewlinePlaceholder
+        );
+
+        return processedTemplate
+            .split(doubleNewlinePlaceholder)
+            .map((paragraph, index) => {
+                return (
+                    <p key={index}>
+                        {paragraph
+                            .split(singleNewlinePlaceholder)
+                            .map((line, i) => {
+                                const parts = line
+                                    .split(/(\{\{.+?\}\})/)
+                                    .filter(Boolean);
+
                                 return (
-                                    <span key={i}>
-                                        {getGreeting(formData.timeZone)}{" "}
-                                    </span>
-                                );
-                            } else if (field === "pickupDate") {
-                                return (
-                                    <span key={i}>
-                                        {/* <span>{formData.pickupDate}</span> */}
-                                        <input
-                                            type="text"
-                                            placeholder="<10 business days from First Contact>"
-                                            value={formData.pickupDate}
-                                            onChange={(e) =>
-                                                handleInput(e, "pickupDate")
+                                    <React.Fragment key={i}>
+                                        {parts.map((part, j) => {
+                                            if (
+                                                part.startsWith("{{") &&
+                                                part.endsWith("}}")
+                                            ) {
+                                                const field = part
+                                                    .slice(2, -2)
+                                                    .trim();
+                                                if (field === "greeting") {
+                                                    return (
+                                                        <span key={j}>
+                                                            {getGreeting(
+                                                                formData.timeZone
+                                                            )}{" "}
+                                                        </span>
+                                                    );
+                                                } else if (
+                                                    field === "pickupDate"
+                                                ) {
+                                                    return (
+                                                        <span key={j}>
+                                                            <input
+                                                                type="text"
+                                                                placeholder="<10 business days from First Contact>"
+                                                                value={
+                                                                    formData.pickupDate
+                                                                }
+                                                                onChange={(e) =>
+                                                                    handleInput(
+                                                                        e,
+                                                                        "pickupDate"
+                                                                    )
+                                                                }
+                                                                onBlur={() =>
+                                                                    handleBlur(
+                                                                        "pickupDate"
+                                                                    )
+                                                                }
+                                                                style={
+                                                                    inputStyle
+                                                                }
+                                                                className="auto-width-input"
+                                                            ></input>
+                                                            <Button
+                                                                variant="link"
+                                                                size="sm"
+                                                                style={{
+                                                                    padding:
+                                                                        "0",
+                                                                    verticalAlign:
+                                                                        "middle",
+                                                                }}
+                                                                onClick={
+                                                                    handlePickupDateCalculation
+                                                                }
+                                                            >
+                                                                <FaCalendarAlt />
+                                                            </Button>
+                                                        </span>
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <input
+                                                            key={j}
+                                                            type="text"
+                                                            placeholder={
+                                                                placeholder.find(
+                                                                    (p) =>
+                                                                        p.name ===
+                                                                        field
+                                                                )
+                                                                    ?.placeholder ||
+                                                                `<${field}>`
+                                                            }
+                                                            value={
+                                                                formData[field]
+                                                            }
+                                                            onChange={(e) =>
+                                                                handleInput(
+                                                                    e,
+                                                                    field
+                                                                )
+                                                            }
+                                                            onBlur={() =>
+                                                                handleBlur(
+                                                                    field
+                                                                )
+                                                            }
+                                                            style={inputStyle}
+                                                            className="auto-width-input"
+                                                        />
+                                                    );
+                                                }
+                                            } else {
+                                                return part;
                                             }
-                                            onBlur={() =>
-                                                handleBlur("pickupDate")
-                                            }
-                                            style={inputStyle}
-                                            className="auto-width-input"
-                                        ></input>
-                                        <Button
-                                            variant="link"
-                                            size="sm"
-                                            style={{
-                                                padding: "0",
-                                                verticalAlign: "middle",
-                                            }}
-                                            onClick={
-                                                handlePickupDateCalculation
-                                            }
-                                        >
-                                            <FaCalendarAlt />
-                                        </Button>
-                                    </span>
+                                        })}
+                                        {i !==
+                                            paragraph.split(
+                                                singleNewlinePlaceholder
+                                            ).length -
+                                                1 && <br />}
+                                    </React.Fragment>
                                 );
-                            } else {
-                                return (
-                                    <input
-                                        key={i}
-                                        type="text"
-                                        placeholder={
-                                            placeholder.find(
-                                                (p) => p.name === field
-                                            )?.placeholder || `<${field}>`
-                                        }
-                                        value={formData[field]}
-                                        onChange={(e) => handleInput(e, field)}
-                                        onBlur={() => handleBlur(field)}
-                                        style={inputStyle}
-                                        className="auto-width-input"
-                                    />
-                                );
-                            }
-                        } else {
-                            return part;
-                        }
-                    })}
-                </p>
-            );
-        });
+                            })}
+                    </p>
+                );
+            });
     };
 
     //console.log("template: " + template); //undefined

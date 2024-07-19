@@ -59,7 +59,7 @@ function App() {
                     )}
                 </div>
                 <div className="col-lg-2 d-none d-lg-block">
-                    <AgentInfo onSaveAgentInfo={handleAgentInfoSaved} />
+                    <AgentInfo />
                     <div className="ml-6 p-6">
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
@@ -68,8 +68,11 @@ function App() {
                 </div>
             </main>
 
-            <footer style={{ marginTop: "-40px", textAlign: "right" }}>
-                <p>Project unfinished, but it works.</p>
+            <footer style={{ marginTop: "0px", textAlign: "right" }}>
+                <p>
+                I hope this proves useful to at least one person. -{" "}
+                    <a href="https://www.indexduo.me">Jing</a>
+                </p>
             </footer>
         </div>
     );
