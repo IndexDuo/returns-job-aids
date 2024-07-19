@@ -401,7 +401,7 @@ const EmailTemplate = (selectedTemplate) => {
                     <div
                         className="border p-3 rounded"
                         style={{
-                            fontSize: "14px",
+                            fontSize: "14.5px",
                             lineHeight: "1.5",
                         }}
                     >
