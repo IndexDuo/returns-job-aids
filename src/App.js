@@ -70,7 +70,7 @@ function App() {
 
             <footer style={{ marginTop: "0px", textAlign: "right" }}>
                 <p>
-                I hope this proves useful to at least one person. -{" "}
+                    I hope this helps even just one person. -{" "}
                     <a href="https://www.indexduo.me">Jing</a>
                 </p>
             </footer>
