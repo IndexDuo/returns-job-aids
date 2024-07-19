@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/AgentInfo.css";
 
-const AgentInfo = () => {
+const AgentInfo = ({onAgentInfoSaved}) => {
     const [agentInfo, setAgentInfo] = useState({
         firstName: "",
         lastName: "",
@@ -23,6 +23,7 @@ const AgentInfo = () => {
         // Save agentInfo to cookies with 8 hours expiration time
         Cookies.set("agentInfo", JSON.stringify(agentInfo), { expires: 1 / 3 }); // 8 hours
         setShowMessage(true);
+        onAgentInfoSaved(true);
         setTimeout(() => setShowMessage(false), 10000); // Hide message after 10 seconds
     };
 

@@ -83,14 +83,16 @@ const EmailTemplate = (selectedTemplate) => {
 
     const getAgentInfoFromCookies = () => {
         const savedData = Cookies.get("agentInfo");
+        // console.log(formData["agentFirstName"]);
         if (savedData) {
             const agentInfo = JSON.parse(savedData);
+            console.log(agentInfo);
             return {
-                firstName: agentInfo.firstName || "",
+                firstName: agentInfo.firstName || formData["agentFirstName"],
                 lastName: agentInfo.lastName || "",
             };
         }
-        return { firstName: "", lastName: "" };
+        return { firstName: formData["agentFirstName"], lastName: "" };
     };
 
     useEffect(() => {
@@ -103,9 +105,11 @@ const EmailTemplate = (selectedTemplate) => {
 
         const intervalId = setInterval(() => {
             const currentAgentInfo = getAgentInfoFromCookies();
+            //console.log(formData["agentFirstName"]);
             setFormData((prevData) => ({
                 ...prevData,
-                agentFirstName: currentAgentInfo.firstName,
+                agentFirstName:
+                    currentAgentInfo.firstName || formData["agentFirstName"],
             }));
             if (currentAgentInfo.lastName) {
                 const lastInitial = currentAgentInfo.lastName.charAt(0);
@@ -114,7 +118,7 @@ const EmailTemplate = (selectedTemplate) => {
                     agentLastInitial: lastInitial,
                 }));
             }
-        }, 1000);
+        }, 6000);
 
         return () => clearInterval(intervalId);
     }, []);
@@ -144,7 +148,7 @@ const EmailTemplate = (selectedTemplate) => {
             if ((month || day || weekday) === "Invalid Date") {
                 value = "";
             } else {
-                value = `${weekday}, ${month} ${day}, ${dateParts[2]}`;
+                value = `${weekday}, ${month} ${day}`;
             }
         }
         setFormData({ ...formData, [field]: value });
@@ -178,6 +182,8 @@ const EmailTemplate = (selectedTemplate) => {
             hour12: false,
             timeZone: timeZoneMap[timeZone],
         });
+        formData["greeting"] =
+            currentHour < 12 ? "Good Morning" : "Good Afternoon";
         return currentHour < 12 ? "Good Morning" : "Good Afternoon";
     };
 

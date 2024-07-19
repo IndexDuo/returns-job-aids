@@ -10,6 +10,7 @@ import ReturnsGuide from "./components/ReturnsGuide.js";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [agentInfoSaved, setAgentInfoSaved] = useState(false);
 
     useEffect(() => {
         const storedPassword = localStorage.getItem("password");
@@ -37,6 +38,10 @@ function App() {
         // console.log(template);
     };
 
+    const handleAgentInfoSaved = (saved) => {
+        setAgentInfoSaved(saved);
+    };
+
     if (!isAuthenticated) {
         return <div>Access denied. Please refresh the page to try again.</div>;
     }
@@ -44,9 +49,8 @@ function App() {
 
     return (
         <div className="container-fluid">
-            <header>{/* <h1>Email Template Assistance</h1> */}</header>
             <main className="row">
-                <div className="col-lg-3 col-md-10">
+                <div className="col-lg-3 d-none d-lg-block">
                     <ReturnsGuide selectedTemplate={selectedTemplate} />
                 </div>
                 <div className="col-lg-7">
@@ -54,8 +58,8 @@ function App() {
                         <EmailTemplate2 selectedTemplate={selectedTemplate} />
                     )}
                 </div>
-                <div className="col-lg-2 col-md-2 d-none d-md-block">
-                    <AgentInfo />
+                <div className="col-lg-2 d-none d-lg-block">
+                    <AgentInfo onSaveAgentInfo={handleAgentInfoSaved} />
                     <div className="ml-6 p-6">
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
@@ -64,37 +68,9 @@ function App() {
                 </div>
             </main>
 
-            {/* <main>
-                <div className="row">
-                    <div className="col-lg-3 col-md-10">
-                        <ReturnsGuide selectedTemplate={selectedTemplate} />
-                    </div>
-                    <div className="col-lg-7">
-                        {selectedTemplate && (
-                            <EmailTemplate2
-                                selectedTemplate={selectedTemplate}
-                            />
-                        )}
-                    </div>
-                    <div className="col-lg-2 col-md-2 d-none d-md-block">
-                        <AgentInfo />
-                    </div>
-                    <div className="row align-items-end">
-                        <div className="col-lg-2 align-self-end">
-                            <EmailTemplateLists
-                                onSelectTemplate={handleSelectTemplate}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </main> */}
-
-            {/* <footer style={{ marginTop: "-40px", textAlign: "right" }}>
-                <p>
-                    &#128008; 2024 Project By{" "}
-                    <a href="https://www.indexduo.me">JING</a>.
-                </p>
-            </footer> */}
+            <footer style={{ marginTop: "-40px", textAlign: "right" }}>
+                <p>Project unfinished, but it works.</p>
+            </footer>
         </div>
     );
 }
