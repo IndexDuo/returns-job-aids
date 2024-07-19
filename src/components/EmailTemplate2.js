@@ -288,7 +288,10 @@ const EmailTemplate = (selectedTemplate) => {
     //console.log("template: " + template); //undefined
     const compiledTemplate = template.replace(
         /\{\{(.+?)\}\}/g,
-        (_, field) => formData[field.trim()] || `<${field.trim()}>`
+        (_, field) =>
+            formData[field.trim()] ||
+            placeholder.find((p) => p.name === field.trim())?.placeholder ||
+            `<${field}>`
     );
 
     return (
