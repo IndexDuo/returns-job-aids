@@ -42,7 +42,7 @@
                 "placeholder": "<Pickup Date>"
             }
         ],
-        "guide": "Use this template if it's the member's first time scheduling pickup.\n\nGreetings can be updated with the time zone drop down.\n\nSave your first and last name using \"Agent Info\" to auto fill your name in the template.\n\nClick the blue calendar icon to auto fill the pickup date. Or insert date in MM/DD/YYYY format (7/19/2024)\n\nClick on the Copy to Clipboard button to copy the email template.\n\nUse Paste without formatting (Ctrl+Shift+V) to paste the email template (BUI formats everything in a single line. Attempting to fix this issue)."
+        "guide": "Use this template if it's the member's first time scheduling pickup.\n\nGreetings can be updated with the time zone drop down.\n\nSave your first and last name using \"Agent Info\" to auto fill your name in the template.\n\nClick the blue calendar icon to auto fill the pickup date. Or insert date in MM/DD/YYYY format (7/19/2024)\n\nClick on the Copy to Clipboard button to copy the email template.\n\nUse Paste without formatting (Ctrl+Shift+V) to paste the email template (or open the site in Citrix)."
     },
     {
         "id": 2,

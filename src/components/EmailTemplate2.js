@@ -118,7 +118,7 @@ const EmailTemplate = (selectedTemplate) => {
                     agentLastInitial: lastInitial,
                 }));
             }
-        }, 6000);
+        }, 1000);
 
         return () => clearInterval(intervalId);
     }, []);
