@@ -24,7 +24,7 @@
 
 7/13: time zone
 
-7/25: adding a task list to readme
+7/25: adding a task list to readme. completed task "pass save button state as props"
 
 # Getting Started with Create React App
 
