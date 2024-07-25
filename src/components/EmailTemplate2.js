@@ -77,7 +77,10 @@ const EmailTemplate = ({ selectedTemplate, agentInfoSaved }) => {
                 lastName: agentInfo.lastName || "",
             };
         }
-        return { firstName: formData["agentFirstName"], lastName: "" };
+        return {
+            firstName: formData["agentFirstName"],
+            lastName: formData["agentLastInitial"],
+        };
     };
     useEffect(() => {
         const initialAgentInfo = getAgentInfoFromCookies();
@@ -86,24 +89,23 @@ const EmailTemplate = ({ selectedTemplate, agentInfoSaved }) => {
             agentFirstName: initialAgentInfo.firstName,
             agentLastName: initialAgentInfo.lastName,
         }));
-        if (agentInfoSaved) {
-            // Only fetch the cookie data if agentInfoSaved is true
-            const currentAgentInfo = getAgentInfoFromCookies();
-            //console.log(formData["agentFirstName"]);
+
+        // Only fetch the cookie data if agentInfoSaved is true
+        const currentAgentInfo = getAgentInfoFromCookies();
+        //console.log(formData["agentFirstName"]);
+        setFormData((prevData) => ({
+            ...prevData,
+            agentFirstName:
+                currentAgentInfo.firstName || formData["agentFirstName"],
+        }));
+        if (currentAgentInfo.lastName) {
+            const lastInitial = currentAgentInfo.lastName.charAt(0);
             setFormData((prevData) => ({
                 ...prevData,
-                agentFirstName:
-                    currentAgentInfo.firstName || formData["agentFirstName"],
+                agentLastInitial: lastInitial,
             }));
-            if (currentAgentInfo.lastName) {
-                const lastInitial = currentAgentInfo.lastName.charAt(0);
-                setFormData((prevData) => ({
-                    ...prevData,
-                    agentLastInitial: lastInitial,
-                }));
-            }
         }
-    }, [agentInfoSaved]);
+    }, [agentInfoSaved, selectedTemplate]);//set both as dependencies so that the useEffect hook runs when either of them changes :D
     // console.log(agentInfoSaved);
 
     // useEffect(() => {

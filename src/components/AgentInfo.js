@@ -25,8 +25,10 @@ const AgentInfo = ({ onAgentInfoSaved }) => {
         setShowMessage(true);
         onAgentInfoSaved(true);
         setTimeout(() => {
-            setShowMessage(false);
             onAgentInfoSaved(false);
+        }, 200); //this is stupid but it works lol
+        setTimeout(() => {
+            setShowMessage(false);
         }, 10000); // hide message after 10 seconds & agentInfoSaved state set to false
     };
 
