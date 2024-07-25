@@ -14,7 +14,7 @@ const timeZoneMap = {
     Atlantic: "America/Puerto_Rico",
 };
 
-const EmailTemplate = (selectedTemplate) => {
+const EmailTemplate = ({ selectedTemplate, agentInfoSaved }) => {
     const [formData, setFormData] = useState({
         greeting: "",
         memberName: "",
@@ -52,28 +52,13 @@ const EmailTemplate = (selectedTemplate) => {
         });
     }, [selectedTemplate]);
 
-    // console.log(JSON.parse(selectedTemplate.selectedTemplate).name);
-
-    // useEffect(() => {
-    //     fetch("/emailTemplates.json")
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             if (!selectedTemplate) {
-    //                 let templateContent = JSON.parse(data[0].template);
-    //                 setTemplate(data[0].template); // Set the first template as default
-    //                 console.log("templateContent: " + templateContent);
-    //             }
-    //         });
-    // }, []);
+    // console.log(selectedTemplate);
 
     useEffect(() => {
-        const templateName = JSON.parse(selectedTemplate.selectedTemplate).name;
-        const templateContent = JSON.parse(
-            selectedTemplate.selectedTemplate
-        ).template;
-        const templateInputs = JSON.parse(
-            selectedTemplate.selectedTemplate
-        ).inputs;
+        // const templateName = JSON.parse(selectedTemplate.selectedTemplate).name;
+        const templateContent = JSON.parse(selectedTemplate).template;
+        // console.log(templateContent);
+        const templateInputs = JSON.parse(selectedTemplate).inputs;
 
         if (selectedTemplate) {
             setTemplate(templateContent);
@@ -86,7 +71,7 @@ const EmailTemplate = (selectedTemplate) => {
         // console.log(formData["agentFirstName"]);
         if (savedData) {
             const agentInfo = JSON.parse(savedData);
-            console.log(agentInfo);
+            // console.log(agentInfo);
             return {
                 firstName: agentInfo.firstName || formData["agentFirstName"],
                 lastName: agentInfo.lastName || "",
@@ -94,7 +79,6 @@ const EmailTemplate = (selectedTemplate) => {
         }
         return { firstName: formData["agentFirstName"], lastName: "" };
     };
-
     useEffect(() => {
         const initialAgentInfo = getAgentInfoFromCookies();
         setFormData((prevData) => ({
@@ -102,8 +86,8 @@ const EmailTemplate = (selectedTemplate) => {
             agentFirstName: initialAgentInfo.firstName,
             agentLastName: initialAgentInfo.lastName,
         }));
-
-        const intervalId = setInterval(() => {
+        if (agentInfoSaved) {
+            // Only fetch the cookie data if agentInfoSaved is true
             const currentAgentInfo = getAgentInfoFromCookies();
             //console.log(formData["agentFirstName"]);
             setFormData((prevData) => ({
@@ -118,10 +102,37 @@ const EmailTemplate = (selectedTemplate) => {
                     agentLastInitial: lastInitial,
                 }));
             }
-        }, 1000);
+        }
+    }, [agentInfoSaved]);
+    // console.log(agentInfoSaved);
 
-        return () => clearInterval(intervalId);
-    }, []);
+    // useEffect(() => {
+    //     const initialAgentInfo = getAgentInfoFromCookies();
+    //     setFormData((prevData) => ({
+    //         ...prevData,
+    //         agentFirstName: initialAgentInfo.firstName,
+    //         agentLastName: initialAgentInfo.lastName,
+    //     }));
+
+    //     const intervalId = setInterval(() => {
+    //         const currentAgentInfo = getAgentInfoFromCookies();
+    //         //console.log(formData["agentFirstName"]);
+    //         setFormData((prevData) => ({
+    //             ...prevData,
+    //             agentFirstName:
+    //                 currentAgentInfo.firstName || formData["agentFirstName"],
+    //         }));
+    //         if (currentAgentInfo.lastName) {
+    //             const lastInitial = currentAgentInfo.lastName.charAt(0);
+    //             setFormData((prevData) => ({
+    //                 ...prevData,
+    //                 agentLastInitial: lastInitial,
+    //             }));
+    //         }
+    //     }, 1000);
+
+    //     return () => clearInterval(intervalId);
+    // }, []);
 
     const handleBlur = (field) => {
         let value = formData[field];

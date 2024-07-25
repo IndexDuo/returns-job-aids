@@ -7,10 +7,12 @@
 -   [ ] copy to clipboard (outside of citrix)
 -   [x] template list
 -   [x] template notes
--   [ ] Agent info "Save" button state pass as props instead of re-render every second
+-   [x] Agent info "Save" button state pass as props instead of re-render every second
 -   [ ] embedded calendar
 -   [ ] email subject with copy to clipboard
 -   [ ] SOP flowchart
+-   [ ] replace time zone with email subject (mbr question)?
+-   [ ] make it prettier
 
 # Returns-Job-Aids
 

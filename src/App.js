@@ -55,11 +55,14 @@ function App() {
                 </div>
                 <div className="col-lg-7">
                     {selectedTemplate && (
-                        <EmailTemplate2 selectedTemplate={selectedTemplate} />
+                        <EmailTemplate2
+                            selectedTemplate={selectedTemplate}
+                            agentInfoSaved={agentInfoSaved}
+                        />
                     )}
                 </div>
                 <div className="col-lg-2 d-none d-lg-block">
-                    <AgentInfo />
+                    <AgentInfo onAgentInfoSaved={handleAgentInfoSaved} />
                     <div className="ml-6 p-6">
                         <EmailTemplateLists
                             onSelectTemplate={handleSelectTemplate}
