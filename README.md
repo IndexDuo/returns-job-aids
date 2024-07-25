@@ -1,12 +1,26 @@
+# To-Do List
+
+-   [x] Email template with fill-in-the blank feature
+-   [x] Save agent first & last name to cookie.
+-   [x] Auto-fill calendar
+-   [x] Phone # reformat
+-   [ ] copy to clipboard (outside of citrix)
+-   [x] template list
+-   [x] template notes
+-   [ ] Agent info "Save" button state pass as props instead of re-render every second
+-   [ ] embedded calendar
+-   [ ] email subject with copy to clipboard
+-   [ ] SOP flowchart
+
 # Returns-Job-Aids
 
 6/19: yes yes! a new project to assist me and hopefully my coworkers with our job.
 
-6/20: started documentation for purpose, proposal, and features 
+6/20: started documentation for purpose, proposal, and features
 
 7/11: started the code...
 
-7/13: time zone IANA names 
+7/13: time zone IANA names
 
 Hawaii: Pacific/Honolulu
 Alaska: America/Anchorage
@@ -15,6 +29,8 @@ Mountain: America/Denver
 Central: America/Chicago
 Eastern: America/New_York
 Atlantic (Puerto Rico): America/Puerto_Rico
+
+7/25: adding a task list to readme
 
 # Getting Started with Create React App
 
