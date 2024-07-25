@@ -13,6 +13,7 @@
 -   [ ] SOP flowchart
 -   [ ] replace time zone with email subject (mbr question)?
 -   [ ] make it prettier
+-   [ ] jest for testing
 
 # Returns-Job-Aids
 
