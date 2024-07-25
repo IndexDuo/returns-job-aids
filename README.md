@@ -22,15 +22,7 @@
 
 7/11: started the code...
 
-7/13: time zone IANA names
-
-Hawaii: Pacific/Honolulu
-Alaska: America/Anchorage
-Pacific: America/Los_Angeles
-Mountain: America/Denver
-Central: America/Chicago
-Eastern: America/New_York
-Atlantic (Puerto Rico): America/Puerto_Rico
+7/13: time zone
 
 7/25: adding a task list to readme
 
