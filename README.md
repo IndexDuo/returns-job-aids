@@ -1,3 +1,5 @@
+Password is **C123**
+
 # To-Do List
 
 -   [x] Email template with fill-in-the blank feature
@@ -17,6 +19,7 @@
 
 # Returns-Job-Aids
 
+----2024----
 6/19: yes yes! a new project!
 
 6/20: started documentation for purpose, proposal, and features
@@ -26,6 +29,9 @@
 7/13: time zone
 
 7/25: adding a task list to readme. completed task "pass save button state as props"
+
+----2025----
+6/19: costco actually adopted my idea as of 6/17/25 per my friend. I presented and proposed this prototype to management before I resigned from my position. This repo's visability will be updated to public now.
 
 # Getting Started with Create React App
 
