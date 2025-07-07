@@ -1,4 +1,4 @@
-Password is **C123**
+~~Password is **C123**~~
 
 # To-Do List
 
@@ -35,6 +35,8 @@ Password is **C123**
 ----2025----
 
 6/19: costco actually adopted my idea as of 6/17/25 per my friend. I presented and proposed this prototype to management before I resigned from my position. This repo's visability will be updated to public now.
+
+7/6: removed auth
 
 # Getting Started with Create React App
 
