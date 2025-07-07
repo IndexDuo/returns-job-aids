@@ -8,30 +8,30 @@ import EmailTemplateLists from "./components/EmailTemplateLists.js";
 import ReturnsGuide from "./components/ReturnsGuide.js";
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    //const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [agentInfoSaved, setAgentInfoSaved] = useState(false);
 
-    useEffect(() => {
-        const storedPassword = localStorage.getItem("password");
-        if (storedPassword && storedPassword === "123") {
-            setIsAuthenticated(true);
-        } else {
-            checkPassword();
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedPassword = localStorage.getItem("password");
+    //     if (storedPassword && storedPassword === "123") {
+    //         setIsAuthenticated(true);
+    //     } else {
+    //         checkPassword();
+    //     }
+    // }, []);
 
-    const checkPassword = () => {
-        const password = prompt("Please enter the password:", "");
-        if (password === "C123") {
-            setIsAuthenticated(true);
-            localStorage.setItem("password", password); // Store password if correct
-        } else {
-            alert("Incorrect password. Access denied.");
-            // Optionally clear stored password if incorrect
-            localStorage.removeItem("password");
-        }
-    };
+    // const checkPassword = () => {
+    //     const password = prompt("Please enter the password:", "");
+    //     if (password === "C123") {
+    //         setIsAuthenticated(true);
+    //         localStorage.setItem("password", password); // Store password if correct
+    //     } else {
+    //         alert("Incorrect password. Access denied.");
+    //         // Optionally clear stored password if incorrect
+    //         localStorage.removeItem("password");
+    //     }
+    // };
     const handleSelectTemplate = (template) => {
         template = JSON.stringify(template);
         setSelectedTemplate(template);
@@ -42,9 +42,9 @@ function App() {
         setAgentInfoSaved(saved);
     };
 
-    if (!isAuthenticated) {
-        return <div>Access denied. Please refresh the page to try again.</div>;
-    }
+    // if (!isAuthenticated) {
+    //     return <div>Access denied. Please refresh the page to try again.</div>;
+    // }
     // console.log("selectedTemplate: " + selectedTemplate);
 
     return (
